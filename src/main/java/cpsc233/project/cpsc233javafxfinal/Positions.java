@@ -1,3 +1,5 @@
+package cpsc233.project.cpsc233javafxfinal;
+
 /**
  * Positions players can be in
  */

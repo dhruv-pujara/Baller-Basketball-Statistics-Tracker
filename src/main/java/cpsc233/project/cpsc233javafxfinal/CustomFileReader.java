@@ -1,3 +1,5 @@
+package cpsc233.project.cpsc233javafxfinal;
+
 import java.io.*;
 import java.io.FileReader;
 import java.util.*;

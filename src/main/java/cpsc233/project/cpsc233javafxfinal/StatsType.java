@@ -1,3 +1,5 @@
+package cpsc233.project.cpsc233javafxfinal;
+
 /**
  * Stats that can be tracked
  */
