@@ -13,9 +13,9 @@ import java.util.Optional;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("Main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Baller");
+        stage.setTitle("Baller: The Basketball Tracking Program v1.3");
         stage.setOnCloseRequest(e -> ExitProgram(e, stage));
         stage.setScene(scene);
         stage.show();
