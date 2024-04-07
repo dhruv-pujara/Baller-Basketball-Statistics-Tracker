@@ -1,6 +1,8 @@
+package cpsc233.project.cpsc233javafxfinal;
+
 import java.util.*;
 import java.io.*;
-public class Main {
+public class OldMain {
     public static void main(String[] args) {
         ArrayList<Team> teams = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);

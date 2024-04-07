@@ -1,5 +1,6 @@
 package cpsc233.project.cpsc233javafxfinal;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,17 +16,19 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PleaseProvideControllerClassName implements Initializable {
+
+        ArrayList<Team> teams = new ArrayList<>();
         @FXML
         private Text ErrorText;
 
         @FXML
-        private ComboBox<?> playerSelect;
+        private ComboBox<Player> playerSelect;
 
         @FXML
         private TextField teamName;
 
         @FXML
-        private ComboBox<?> teamSelect;
+        private ComboBox<Team> teamSelect;
 
         @FXML
         private Font x1;
@@ -48,15 +51,31 @@ public class PleaseProvideControllerClassName implements Initializable {
         void addPlayer(MouseEvent event) {
 
         }
+        public void setData(){
+                teamSelect.getItems().clear();
+                for(Team teamstoadd: teams){
+                        teamSelect.getItems().add(teamstoadd);
+                }
+        }
 
         @FXML
         void addTeam(MouseEvent event) {
-                if(teamName.getText().equals("")){
+                if (teamName.getText().equals("")) {
                         ErrorText.setText("Error: No team name given");
-                }else {
-                        ArrayList<Player> players = new ArrayList<>();
-                        Team team = new Team(players, teamName.getText());
-                        ErrorText.setText( "Team " + team.getName() + " has been added!");
+                } else {
+                        for (Team teamnames : teams) {
+                                if (teamnames.getName().equals(teamName.getText())) {
+                                        ErrorText.setText("Invalid team, team with this name already exists.");
+                                        break;
+                                }
+                        }
+                        if (!ErrorText.getText().equals("Invalid team, team with this name already exists.")) {
+                                ArrayList<Player> players = new ArrayList<>();
+                                Team team = new Team(players, teamName.getText());
+                                ErrorText.setText("Team " + team.getName() + " has been added!");
+                                teams.add(team);
+                                setData();
+                        }
                 }
         }
 
