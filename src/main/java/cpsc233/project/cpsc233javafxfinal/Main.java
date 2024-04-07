@@ -26,11 +26,14 @@ public class Main extends Application {
     }
 
     public void ExitProgram(javafx.event.Event event, Stage stage) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Exit");
-        alert.setHeaderText("Baller is about to be closed");
-        alert.setContentText("Would you like to save your file before exiting? If so click cancel and go save!");
-        Optional<ButtonType> closeornot = alert.showAndWait();
+        Alert leave = new Alert(Alert.AlertType.CONFIRMATION);
+        leave.setTitle("Close Application Confirmation");
+        leave.setHeaderText("""
+                You are about to close Baller: The Basketball Tracking Program v1.3!
+                Please make sure you have saved your file before exiting.
+                """);
+        leave.setContentText("Click 'OK' to exit, or 'Cancel' to go back.");
+        Optional<ButtonType> closeornot = leave.showAndWait();
         if (closeornot.isPresent() && (closeornot.get() == ButtonType.CANCEL || closeornot.get() == ButtonType.CLOSE)) {
             event.consume();
         }

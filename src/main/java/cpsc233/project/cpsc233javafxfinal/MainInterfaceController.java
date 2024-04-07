@@ -26,7 +26,7 @@ public class MainInterfaceController implements Initializable {
         private Stage stage;
         private Scene scene;
         public void switchToAddPlayer(ActionEvent e) throws IOException {
-                FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("AddPlayer.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
                 stage = (Stage)((Node)e.getSource()).getScene().getWindow();
                 scene = new Scene(fxmlLoader.load());
                 stage.setTitle("Baller: The Basketball Tracking Program v1.3");
@@ -34,7 +34,7 @@ public class MainInterfaceController implements Initializable {
                 stage.show();
         }
         public void switchToAddGame(ActionEvent e) throws IOException {
-                FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("AddGame.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddGame.fxml"));
                 stage = (Stage)((Node)e.getSource()).getScene().getWindow();
                 scene = new Scene(fxmlLoader.load());
                 stage.setTitle("Baller: The Basketball Tracking Program v1.3");
@@ -83,7 +83,7 @@ public class MainInterfaceController implements Initializable {
         void addPlayer(MouseEvent event) {
 
         }
-        public void setData(){
+        public void setData4team(){
                 teamSelect.getItems().clear();
                 for(Team teamstoadd: teams){
                         teamSelect.getItems().add(teamstoadd);
@@ -92,6 +92,7 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         void addTeam(MouseEvent event) {
+                ErrorText.setText("Welcome to Baller!");
                 if (teamName.getText().isEmpty()) {
                         ErrorText.setText("Error: No team name given");
                         ErrorText.setFill(Color.RED);
@@ -100,7 +101,6 @@ public class MainInterfaceController implements Initializable {
                                 if (teamnames.getName().equals(teamName.getText())) {
                                         ErrorText.setText("Invalid team, team with this name already exists.");
                                         ErrorText.setFill(Color.RED);
-                                        break;
                                 }
                         }
                         if (!ErrorText.getText().equals("Invalid team, team with this name already exists.")) {
@@ -109,7 +109,7 @@ public class MainInterfaceController implements Initializable {
                                 ErrorText.setText("Team " + team.getName() + " has been added!");
                                 ErrorText.setFill(Color.BLACK);
                                 teams.add(team);
-                                setData();
+                                setData4team();
                         }
                 }
         }
@@ -183,11 +183,24 @@ public class MainInterfaceController implements Initializable {
                 about.setContentText("""
                     Author: Gavin Walters, JJ Nelson, Dhruv Pujara;
                     Emails: gavin.walters@ucalgary.ca, jj.nelson@ucalgary.ca, dhruv.pujara1@ucalgary.ca
-                    UCID: [GAVIN UCID HERE], 30062571, [DHRUV UCID HERE]
+                    UCID: 30142712, 30062571, [DHRUV UCID HERE]
                     Tutorial: T13
                     TA: Shanna Hollingworth
                     Program Version: v1.3""");
                 about.show();
+        }
+        @FXML
+        void playerChange(ActionEvent event) {
+                playerSelect.getItems().clear();
+                for(Team teamstoadd: teams){
+                        if(teamstoadd.equals(teamSelect.getValue())){
+                                ArrayList<Player> players = teamstoadd.getPlayers();
+                                for(Player playerstoadd: players){
+                                        playerSelect.getItems().add(playerstoadd);
+                                }
+                        }
+                }
+
         }
 
 
