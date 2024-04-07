@@ -2,14 +2,19 @@ package cpsc233.project.cpsc233javafxfinal;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -17,6 +22,33 @@ import java.util.ResourceBundle;
 
 public class MainInterfaceController implements Initializable {
 
+        //CODE TO HAVE MULTIPLE SCENES
+        private Stage stage;
+        private Scene scene;
+        public void switchToAddPlayer(ActionEvent e) throws IOException {
+                FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("AddPlayer.fxml"));
+                stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+                scene = new Scene(fxmlLoader.load());
+                stage.setTitle("Baller: The Basketball Tracking Program v1.3");
+                stage.setScene(scene);
+                stage.show();
+        }
+        public void switchToAddGame(ActionEvent e) throws IOException {
+                FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("AddGame.fxml"));
+                stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+                scene = new Scene(fxmlLoader.load());
+                stage.setTitle("Baller: The Basketball Tracking Program v1.3");
+                stage.setScene(scene);
+                stage.show();
+        }
+        public void switchToMainInterface(ActionEvent e) throws IOException {
+                FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("Main.fxml"));
+                stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+                scene = new Scene(fxmlLoader.load());
+                stage.setTitle("Baller: The Basketball Tracking Program v1.3");
+                stage.setScene(scene);
+                stage.show();
+        }
         ArrayList<Team> teams = new ArrayList<>();
         @FXML
         private Text ErrorText;
