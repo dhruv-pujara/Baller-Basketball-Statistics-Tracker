@@ -73,8 +73,8 @@
                   <TextField fx:id="teamName" layoutX="240.0" layoutY="33.0" prefWidth="169.0" promptText="Add Team Name" />
                   <Button fx:id="addTeam" layoutX="289.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#addTeam" text="Add Team" />
                   <ComboBox fx:id="teamSelect" layoutX="249.0" layoutY="107.0" onAction="#playerChange" prefWidth="150.0" promptText="Select a Team" />
-                  <Button fx:id="addGame" layoutX="213.0" layoutY="143.0" mnemonicParsing="false" onAction="#switchToAddGame" onMouseClicked="#addGame" text="Add Game" />
-                  <Button fx:id="addPlayer" layoutX="362.0" layoutY="143.0" mnemonicParsing="false" onAction="#switchToAddPlayer" onMouseClicked="#addPlayer" text="Add Player" />
+                  <Button layoutX="213.0" layoutY="143.0" mnemonicParsing="false" onAction="#switchToAddGame" onMouseClicked="#addGame" text="Add Game" />
+                  <Button layoutX="362.0" layoutY="143.0" mnemonicParsing="false" onAction="#switchToAddPlayer" onMouseClicked="#addPlayer" text="Add Player" />
                   <ComboBox fx:id="playerSelect" layoutX="249.0" layoutY="182.0" onAction="#viewPortfolio" prefWidth="150.0" promptText="Select a Player" />
                   <Button fx:id="viewLastGame" layoutX="199.0" layoutY="227.0" mnemonicParsing="false" onMouseClicked="#lastgameStats" text="View Last Game" />
                   <Button fx:id="viewStats" layoutX="363.0" layoutY="227.0" mnemonicParsing="false" onMouseClicked="#lastgameStats" text="View Stats" />
@@ -95,7 +95,7 @@
       </SplitPane>
       <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="918.0" spacing="5.0" VBox.vgrow="NEVER">
          <children>
-            <Text fx:id="ErrorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="890.0" />
+            <Text fx:id="ErrorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Baller!" wrappingWidth="890.0" />
             <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
          </children>
          <padding>

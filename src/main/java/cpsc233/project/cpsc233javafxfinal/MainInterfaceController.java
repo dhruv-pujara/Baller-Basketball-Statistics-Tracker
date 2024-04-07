@@ -53,7 +53,7 @@ public class MainInterfaceController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
         }
-        ArrayList<Team> teams = new ArrayList<>();
+        public ArrayList<Team> teams = new ArrayList<>();
         @FXML
         private Text ErrorText;
 
