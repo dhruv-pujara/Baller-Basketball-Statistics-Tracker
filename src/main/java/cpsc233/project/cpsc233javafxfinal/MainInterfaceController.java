@@ -69,6 +69,7 @@ public class MainInterfaceController implements Initializable {
         public ArrayList<Team> teams = new ArrayList<>();
         @FXML
         private Text ErrorText;
+        private String fileName;
 
         @FXML
         private ComboBox<Player> playerSelect;
@@ -163,23 +164,35 @@ public class MainInterfaceController implements Initializable {
                 //Prompts a text dialog and asks user for file name to load from
                 try {
                         File file = fileChooser.showOpenDialog(new Stage());
+                        fileName = file.getName();
                         ArrayList<Team> newteams = CustomFileReader.loadDataFromFile(file);
-                    teams.addAll(newteams);
-                } catch (FileNotFoundException ex) {
-                    throw new RuntimeException(ex);
-                }
+                        teams.addAll(newteams);
+                        setData4team();
+                        ErrorText.setText("Sucessfully Loaded File!");
+                        ErrorText.setFill(Color.BLACK);
+                        }catch (FileNotFoundException f){
+                                ErrorText.setText("File not found- please create a file and try again.");
+                                ErrorText.setFill(Color.RED);
+                        }catch (RuntimeException f){
+                                ErrorText.setText("File invalid- please create a file and try again.");
+                                ErrorText.setFill(Color.RED);
+                        }
         }
 
-        public void save (ActionEvent e){
+        public void save (ActionEvent e) throws FileNotFoundException {
+                if (!fileName.isEmpty()) {
+                        fileChooser.setInitialFileName(fileName);
+                }
                 //Prompts a text dialog and asks user for a file name to save too
-                TextInputDialog save = new TextInputDialog();
-                save.setTitle("Save your work:");
-                save.setHeaderText("Please enter the name of the file you'd like to save too:");
-                Optional<String> result = save.showAndWait();
-                if (result.isPresent()) {
-                        File fileName = new File(result.get() + ".txt");
-                        //save fileName to CustiomFileReader
-                        //CustomFileReader.loadDataFromFile(fileName)
+                File file = fileChooser.showSaveDialog(new Stage());
+                if (file != null) {
+                        try {
+                                CustomFileReader.saveFile(file, teams);
+                                ErrorText.setText("You have successfully saved your data to " + file.getName());
+                        } catch (FileNotFoundException g) {
+                                ErrorText.setText("Invalid File name input: try again");
+                                ErrorText.setFill(Color.RED);
+                        }
                 }
         }
 

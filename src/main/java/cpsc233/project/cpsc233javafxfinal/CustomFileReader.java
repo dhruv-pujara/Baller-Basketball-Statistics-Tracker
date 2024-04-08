@@ -13,13 +13,13 @@ public class CustomFileReader extends Reader {
     }
 
     // Method to convert an array of strings into a CSV format
-    private String convertCSV(String[] data) {
+    private static String convertCSV(String[] data) {
         return Stream.of(data)
                 .collect(Collectors.joining(","));
     }
 
     // Method to save player and team data to a file
-    public void saveFile(File file, ArrayList<Team> teams) throws FileNotFoundException {
+    public static  void saveFile(File file, ArrayList<Team> teams) throws FileNotFoundException {
         ArrayList<String[]> values = new ArrayList<String[]>();
         for (Team teamlist : teams) {
             for (Player players : teamlist.getPlayers()) {
@@ -32,7 +32,7 @@ public class CustomFileReader extends Reader {
         // Write the values to the file
         try (PrintWriter printwriter = new PrintWriter(file)) {
             values.stream()
-                    .map(this::convertCSV)
+                    .map(data -> convertCSV(data))
                     .forEach(printwriter::println);
             //I had no clue how to do this, so I used the idea from this link
             //https://www.baeldung.com/java-csv
