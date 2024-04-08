@@ -99,6 +99,14 @@ public class MainInterfaceController implements Initializable {
         void addGame(MouseEvent event) {
 
         }
+        @FXML
+        void statBest(MouseEvent event) {
+
+        }
+        @FXML
+        void allStar(MouseEvent event) {
+
+        }
 
         @FXML
         void addPlayer(ActionEvent event) {
