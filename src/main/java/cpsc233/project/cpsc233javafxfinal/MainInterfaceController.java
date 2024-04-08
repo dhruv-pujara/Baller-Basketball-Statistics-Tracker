@@ -43,24 +43,27 @@ public class MainInterfaceController implements Initializable {
         }
         public void switchToAddGame(ActionEvent e) throws IOException {
                 Team team = teamSelect.getValue();
-                if(team != null) {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddGame.fxml"));
-                        Parent root = fxmlLoader.load();
-                        addGameController controller = fxmlLoader.getController();
+                if (team != null) {
+                        for (Player players : team.getPlayers()) {
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddGame.fxml"));
+                                Parent root = fxmlLoader.load();
+                                addGameController controller = fxmlLoader.getController();
 
-                        controller.initData(team);
-                        controller.setMainInterfaceController(this);
+                                controller.initData(team, players);
+                                controller.setMainInterfaceController(this);
 
-                        Stage stage = new Stage();
-                        Scene scene = new Scene(root);
-                        stage.setTitle("Baller: The Basketball Tracking Program v1.3");
-                        stage.setScene(scene);
-                        stage.show();
 
+                                Stage stage = new Stage();
+                                Scene scene = new Scene(root);
+                                stage.setTitle("Baller: The Basketball Tracking Program v1.3");
+                                stage.setScene(scene);
+                                stage.show();
+
+                        }
                 } else {
                         ErrorText.setText("Please select a team before adding a game.");
-                }
 
+                }
         }
         @FXML
         public void switchToMainInterface(ActionEvent e) throws IOException {
