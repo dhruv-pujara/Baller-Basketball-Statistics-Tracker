@@ -12,9 +12,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainInterfaceController implements Initializable {
+        public FileChooser fileChooser = new FileChooser();
 
         //CODE TO HAVE MULTIPLE SCENES
         private Stage stage;
@@ -158,14 +161,12 @@ public class MainInterfaceController implements Initializable {
 
         public void load (ActionEvent e) {
                 //Prompts a text dialog and asks user for file name to load from
-                TextInputDialog save = new TextInputDialog();
-                save.setTitle("Load your work:");
-                save.setHeaderText("Please enter a file name to open:");
-                Optional<String> result = save.showAndWait();
-                if (result.isPresent()) {
-                        File fileName = new File(result.get() + ".txt");
-                        //load Filename using CustomFileReader
-                        //CustomFileReader.saveFile(fileName)
+                try {
+                        File file = fileChooser.showOpenDialog(new Stage());
+                        ArrayList<Team> newteams = CustomFileReader.loadDataFromFile(file);
+                    teams.addAll(newteams);
+                } catch (FileNotFoundException ex) {
+                    throw new RuntimeException(ex);
                 }
         }
 
@@ -251,6 +252,7 @@ public class MainInterfaceController implements Initializable {
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
+                fileChooser.setInitialDirectory(new File("C:\\users"));
 
         }
 }

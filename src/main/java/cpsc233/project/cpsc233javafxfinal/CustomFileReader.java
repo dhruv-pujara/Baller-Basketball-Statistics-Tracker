@@ -41,7 +41,7 @@ public class CustomFileReader extends Reader {
     }
 
     // Method to load player and team data from a file
-    public ArrayList<Team> loadDataFromFile(File file) throws FileNotFoundException {
+    public static ArrayList<Team> loadDataFromFile(File file) throws FileNotFoundException {
         String line;
         ArrayList<Team> teamlist = new ArrayList<Team>();
         ArrayList<Player> players = new ArrayList<Player>();
