@@ -155,7 +155,8 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         void lastgameStats(MouseEvent event) {
-
+                Player player = playerSelect.getValue();
+                descriptionText.setText(Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
         }
 
         @FXML
