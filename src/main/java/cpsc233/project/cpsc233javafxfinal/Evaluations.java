@@ -217,7 +217,7 @@ return null;
      * @param statsType Type of Stats category to be evaluated
      */
     public static String TopPlayerStat(ArrayList<Team> teamlist, StatsType statsType){
-        String top;
+        String top = "";
     HashMap<Double, String> TopPlayersStats = new HashMap<>();
     ArrayList<Stats> statsforcomparison = new ArrayList<Stats>();
     ArrayList<Double> Statsstorage = new ArrayList<>();
@@ -248,8 +248,8 @@ return null;
             Double maxoff = Collections.max(Statsstorage);
             Statsstorage.add(0, maxoff);
             String TopStats = TopPlayersStats.get(Statsstorage.get(0));
-            System.out.println("Best player in " + statsType);
-            System.out.println(TopStats);
+            top = "Best player in " + statsType + ": " + TopStats;
         }
+        return top;
 }
 }

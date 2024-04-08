@@ -76,7 +76,7 @@ public class MainInterfaceController implements Initializable {
         private Text ErrorText;
 
         @FXML
-        private ComboBox<Positions> Stats;
+        private ComboBox<StatsType> Stats;
 
         private String fileName;
 
@@ -110,7 +110,7 @@ public class MainInterfaceController implements Initializable {
         }
         @FXML
         void statBest(MouseEvent event) {
-
+                descriptionText.setText(Evaluations.TopPlayerStat(teams, Stats.getValue()));
         }
         @FXML
         void allStar(MouseEvent event) {
@@ -312,7 +312,7 @@ public class MainInterfaceController implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
                 fileChooser.setInitialDirectory(new File("C:\\users"));
-                Stats.getItems().addAll(Positions.Centre, Positions.PowerForward, Positions.SmallForward, Positions.PointGuard, Positions.ShootingGuard);
+                Stats.getItems().addAll(StatsType.POINTS, StatsType.ASSISTS, StatsType.BLOCKS, StatsType.REBOUNDS, StatsType.STEALS);
         }
 
 
