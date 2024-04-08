@@ -216,7 +216,8 @@ return null;
      * @param teamlist Arraylist of teams
      * @param statsType Type of Stats category to be evaluated
      */
-    public static void TopPlayerStat(ArrayList<Team> teamlist, StatsType statsType){
+    public static String TopPlayerStat(ArrayList<Team> teamlist, StatsType statsType){
+        String top;
     HashMap<Double, String> TopPlayersStats = new HashMap<>();
     ArrayList<Stats> statsforcomparison = new ArrayList<Stats>();
     ArrayList<Double> Statsstorage = new ArrayList<>();
