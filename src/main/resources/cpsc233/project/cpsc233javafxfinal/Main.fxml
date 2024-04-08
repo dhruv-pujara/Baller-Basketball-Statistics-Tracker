@@ -78,8 +78,8 @@
                   <ComboBox fx:id="playerSelect" layoutX="249.0" layoutY="182.0" onAction="#viewPortfolio" prefWidth="150.0" promptText="Select a Player" />
                   <Button fx:id="viewLastGame" layoutX="199.0" layoutY="227.0" mnemonicParsing="false" onMouseClicked="#lastgameStats" text="View Last Game" />
                   <Button fx:id="viewStats" layoutX="363.0" layoutY="227.0" mnemonicParsing="false" onMouseClicked="#lastgameStats" text="View Stats" />
-                  <Button layoutX="48.0" layoutY="182.0" mnemonicParsing="false" onMouseClicked="#allStar" text="All Star" />
-                  <Button fx:id="bestInSpot" layoutX="35.0" layoutY="234.0" mnemonicParsing="false" onMouseClicked="#statBest" text="Best in Spot" />
+                  <Button layoutX="14.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#allStar" text="All Star" />
+                  <Button fx:id="bestInSpot" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#statBest" text="Best in Stat?" />
                   <ScrollPane layoutX="439.0" prefHeight="552.0" prefWidth="463.0">
                      <content>
                         <AnchorPane prefHeight="547.0" prefWidth="459.0">
@@ -89,6 +89,7 @@
                         </AnchorPane>
                      </content>
                   </ScrollPane>
+                  <ComboBox fx:id="Stats" layoutX="110.0" layoutY="131.0" prefHeight="25.0" prefWidth="71.0" promptText="Stat" />
                </children>
             </AnchorPane>
          </items>

@@ -69,6 +69,10 @@ public class MainInterfaceController implements Initializable {
         public ArrayList<Team> teams = new ArrayList<>();
         @FXML
         private Text ErrorText;
+
+        @FXML
+        private ComboBox<Positions> Stats;
+
         private String fileName;
 
         @FXML
@@ -105,7 +109,22 @@ public class MainInterfaceController implements Initializable {
         }
         @FXML
         void allStar(MouseEvent event) {
-
+                if (teams.isEmpty()){
+                        ErrorText.setText("There are no teams currently created.");
+                }else {
+                        descriptionText.setText("The current all star team for Offense and Defense " +
+                                "by position are:" + "\n" +
+                        "Centre: " +
+                        Evaluations.topOffTopDefForPosition(teams, Positions.Centre) + "\n" +
+                        "Small Forward: " +
+                        Evaluations.topOffTopDefForPosition(teams, Positions.SmallForward)+ "\n" +
+                        "Power Forward: " +
+                        Evaluations.topOffTopDefForPosition(teams, Positions.PowerForward)+ "\n" +
+                        "Shooting Guard: " +
+                        Evaluations.topOffTopDefForPosition(teams, Positions.ShootingGuard)+ "\n" +
+                        "Point Guard: " +
+                        Evaluations.topOffTopDefForPosition(teams, Positions.PointGuard));
+                }
         }
 
         @FXML
@@ -288,6 +307,6 @@ public class MainInterfaceController implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
                 fileChooser.setInitialDirectory(new File("C:\\users"));
-
+                Stats.getItems().addAll(Positions.Centre, Positions.PowerForward, Positions.SmallForward, Positions.PointGuard, Positions.ShootingGuard);
         }
 }

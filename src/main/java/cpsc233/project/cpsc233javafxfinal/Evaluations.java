@@ -173,7 +173,8 @@ public class Evaluations{
      * @param teamlist Takes the arraylist of teams
      * @param position Take a position - add more - DEV
      */
-    public static void topOffTopDefForPosition(ArrayList<Team> teamlist, Positions position){
+    public static String topOffTopDefForPosition(ArrayList<Team> teamlist, Positions position){
+        String eval;
         HashMap<Double, String> TopPlayersOff = new HashMap<>();
         HashMap<Double, String> TopPlayersDef = new HashMap<>();
         ArrayList<Double> OffStorage = new ArrayList<>();
@@ -204,12 +205,10 @@ public class Evaluations{
                 DefStorage.add(0, maxdef);
                 String TopOff = TopPlayersOff.get(OffStorage.get(0));
                 String TopDef = TopPlayersDef.get(DefStorage.get(0));
-                System.out.println("Offensive All Star");
-                System.out.println(TopOff);
-                System.out.println("Defensive All Star");
-                System.out.println(TopDef);
+                eval = "Offensive All Star: " + TopOff + "\n" + "Defensive All Star" + TopDef;
+                return eval;
             }
-
+return null;
 }
 
     /**
