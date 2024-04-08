@@ -110,25 +110,52 @@ public class MainInterfaceController implements Initializable {
         }
         @FXML
         void statBest(MouseEvent event) {
-                descriptionText.setText(Evaluations.TopPlayerStat(teams, Stats.getValue()));
+                int value = 1;
+                if (teams.isEmpty()) {
+                        ErrorText.setText("There are no teams currently created.");
+                        ErrorText.setFill(Color.RED);
+                }else {
+                        for (Team teamstoiterate : teams) {
+                                if (!teamstoiterate.getPlayers().isEmpty()) {
+                                        value = 0;
+                                }
+                        }
+                        if (value == 0) {
+                                descriptionText.setText(Evaluations.TopPlayerStat(teams, Stats.getValue()));
+                        }else{
+                                ErrorText.setText("There are no players currently made");
+                                ErrorText.setFill(Color.RED);
+                        }
+                }
         }
         @FXML
         void allStar(MouseEvent event) {
+                int value = 1;
                 if (teams.isEmpty()){
                         ErrorText.setText("There are no teams currently created.");
                 }else {
-                        descriptionText.setText("The current all star team for Offense and Defense " +
-                                "by position are:" + "\n" +
-                        "Centre: " +
-                        Evaluations.topOffTopDefForPosition(teams, Positions.Centre) + "\n" +
-                        "Small Forward: " +
-                        Evaluations.topOffTopDefForPosition(teams, Positions.SmallForward)+ "\n" +
-                        "Power Forward: " +
-                        Evaluations.topOffTopDefForPosition(teams, Positions.PowerForward)+ "\n" +
-                        "Shooting Guard: " +
-                        Evaluations.topOffTopDefForPosition(teams, Positions.ShootingGuard)+ "\n" +
-                        "Point Guard: " +
-                        Evaluations.topOffTopDefForPosition(teams, Positions.PointGuard));
+                        for (Team teamstoiterate : teams) {
+                                if (!teamstoiterate.getPlayers().isEmpty()) {
+                                        value = 0;
+                                }
+                        }
+                        if (value == 0) {
+                                descriptionText.setText("The current all star team for Offense and Defense " +
+                                        "by position are:" + "\n" +
+                                        "Centre: " +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.Centre) + "\n" +
+                                        "Small Forward: " +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.SmallForward) + "\n" +
+                                        "Power Forward: " +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.PowerForward) + "\n" +
+                                        "Shooting Guard: " +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.ShootingGuard) + "\n" +
+                                        "Point Guard: " +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.PointGuard));
+                        }else{
+                                ErrorText.setText("There are no players currently made");
+                                ErrorText.setFill(Color.RED);
+                        }
                 }
         }
 
