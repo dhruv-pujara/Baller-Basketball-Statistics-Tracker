@@ -150,20 +150,22 @@ public class Evaluations{
      * @param rebounds Takes Stats type "rebounds" from player
      * @param gamesplayed Takes int gamePlayed from player
      */
-    public static void fullPrintedEvaluationAndLastGameStats(Stats points, Stats assists, Stats steals, Stats blocks, Stats rebounds, int gamesplayed, int priorgamecount){
+    public static String fullPrintedEvaluationAndLastGameStats(Stats points, Stats assists, Stats steals, Stats blocks, Stats rebounds, int gamesplayed, int priorgamecount){
         //Printed evaluation of last game
+        String eval;
         Double pointseval = evaluationsOfStats(points, gamesplayed, priorgamecount);
         Double assistseval = evaluationsOfStats(assists, gamesplayed, priorgamecount);
         Double stealsseval = evaluationsOfStats(steals, gamesplayed, priorgamecount);
         Double blockseval = evaluationsOfStats(blocks, gamesplayed, priorgamecount);
         Double reboundseval = evaluationsOfStats(rebounds, gamesplayed, priorgamecount);
         String evaluation = strevaluation(pointseval, assistseval,  stealsseval, blockseval, reboundseval, gamesplayed);
-        System.out.println("Points: " + points.lastGamestats(gamesplayed, priorgamecount) + " ");
-        System.out.println("Assists: " + assists.lastGamestats(gamesplayed, priorgamecount) + " ");
-        System.out.println("Steals: "+ steals.lastGamestats(gamesplayed, priorgamecount) + " ");
-        System.out.println("Blocks: "+ blocks.lastGamestats(gamesplayed, priorgamecount) + " ");
-        System.out.println("Rebounds: " + rebounds.lastGamestats(gamesplayed, priorgamecount) + " ");
-        System.out.println("Evaluation: " + evaluation);
+        eval = "Points: " + points.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
+        "Assists: " + assists.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
+        "Steals: "+ steals.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
+        "Blocks: "+ blocks.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
+        "Rebounds: " + rebounds.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
+         "Evaluation: " + evaluation;
+        return eval;
     }
 
     /**

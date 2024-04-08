@@ -12,9 +12,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainInterfaceController implements Initializable {
+        public FileChooser fileChooser = new FileChooser();
 
         //CODE TO HAVE MULTIPLE SCENES
         @FXML
@@ -71,6 +74,7 @@ public class MainInterfaceController implements Initializable {
         public ArrayList<Team> teams = new ArrayList<>();
         @FXML
         private Text ErrorText;
+        private String fileName;
 
         @FXML
         private ComboBox<Player> playerSelect;
@@ -92,9 +96,20 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         private Color x4;
+        @FXML
+        private Label descriptionText;
+
 
         @FXML
         void addGame(MouseEvent event) {
+
+        }
+        @FXML
+        void statBest(MouseEvent event) {
+
+        }
+        @FXML
+        void allStar(MouseEvent event) {
 
         }
 
@@ -153,37 +168,58 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         void lastgameStats(MouseEvent event) {
-
+                Player player = playerSelect.getValue();
+                descriptionText.setText(Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
         }
 
         @FXML
         void viewPortfolio(ActionEvent event) {
-
+                playerSelect.getItems().clear();
+                for (Team teamstoadd : teams) {
+                        if (teamstoadd.equals(teamSelect.getValue())) {
+                                ArrayList<Player> players = teamstoadd.getPlayers();
+                                for (Player playerstoadd : players) {
+                                        if (playerstoadd.equals(playerSelect.getValue())) {
+                                                descriptionText.setText(playerstoadd.toString());
+                                        }
+                                }
+                        }
+                }
         }
 
         public void load (ActionEvent e) {
                 //Prompts a text dialog and asks user for file name to load from
-                TextInputDialog save = new TextInputDialog();
-                save.setTitle("Load your work:");
-                save.setHeaderText("Please enter a file name to open:");
-                Optional<String> result = save.showAndWait();
-                if (result.isPresent()) {
-                        File fileName = new File(result.get() + ".txt");
-                        //load Filename using CustomFileReader
-                        //CustomFileReader.saveFile(fileName)
-                }
+                try {
+                        File file = fileChooser.showOpenDialog(new Stage());
+                        fileName = file.getName();
+                        ArrayList<Team> newteams = CustomFileReader.loadDataFromFile(file);
+                        teams.addAll(newteams);
+                        setData4team();
+                        ErrorText.setText("Sucessfully Loaded File!");
+                        ErrorText.setFill(Color.BLACK);
+                        }catch (FileNotFoundException f){
+                                ErrorText.setText("File not found- please create a file and try again.");
+                                ErrorText.setFill(Color.RED);
+                        }catch (RuntimeException f){
+                                ErrorText.setText("File invalid- please create a file and try again.");
+                                ErrorText.setFill(Color.RED);
+                        }
         }
 
-        public void save (ActionEvent e){
+        public void save (ActionEvent e) throws FileNotFoundException {
+                if (!fileName.isEmpty()) {
+                        fileChooser.setInitialFileName(fileName);
+                }
                 //Prompts a text dialog and asks user for a file name to save too
-                TextInputDialog save = new TextInputDialog();
-                save.setTitle("Save your work:");
-                save.setHeaderText("Please enter the name of the file you'd like to save too:");
-                Optional<String> result = save.showAndWait();
-                if (result.isPresent()) {
-                        File fileName = new File(result.get() + ".txt");
-                        //save fileName to CustiomFileReader
-                        //CustomFileReader.loadDataFromFile(fileName)
+                File file = fileChooser.showSaveDialog(new Stage());
+                if (file != null) {
+                        try {
+                                CustomFileReader.saveFile(file, teams);
+                                ErrorText.setText("You have successfully saved your data to " + file.getName());
+                        } catch (FileNotFoundException g) {
+                                ErrorText.setText("Invalid File name input: try again");
+                                ErrorText.setFill(Color.RED);
+                        }
                 }
         }
 
@@ -256,6 +292,7 @@ public class MainInterfaceController implements Initializable {
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
+                fileChooser.setInitialDirectory(new File("C:\\users"));
 
         }
 
