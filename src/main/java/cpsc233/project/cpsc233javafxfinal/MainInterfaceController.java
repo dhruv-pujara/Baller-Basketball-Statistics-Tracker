@@ -27,8 +27,12 @@ public class MainInterfaceController implements Initializable {
         public FileChooser fileChooser = new FileChooser();
 
         //CODE TO HAVE MULTIPLE SCENES
+        @FXML
         private Stage stage;
+
+        @FXML
         private Scene scene;
+
         public void switchToAddPlayer(ActionEvent e) throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
                 stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -40,26 +44,27 @@ public class MainInterfaceController implements Initializable {
         public void switchToAddGame(ActionEvent e) throws IOException {
                 Team team = teamSelect.getValue();
                 if(team != null) {
-                        ArrayList<Player> players = team.getPlayers();
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddGame.fxml"));
                         Parent root = fxmlLoader.load();
+                        addGameController controller = fxmlLoader.getController();
+
+                        controller.initData(team);
+                        controller.setMainInterfaceController(this);
 
                         Stage stage = new Stage();
                         Scene scene = new Scene(root);
                         stage.setTitle("Baller: The Basketball Tracking Program v1.3");
                         stage.setScene(scene);
-                        for (Player playersToAddGame : players) {
-
-
-                        }
                         stage.show();
+
                 } else {
                         ErrorText.setText("Please select a team before adding a game.");
                 }
 
         }
+        @FXML
         public void switchToMainInterface(ActionEvent e) throws IOException {
-                FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("Main.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
                 stage = (Stage)((Node)e.getSource()).getScene().getWindow();
                 scene = new Scene(fxmlLoader.load());
                 stage.setTitle("Baller: The Basketball Tracking Program v1.3");
@@ -309,4 +314,6 @@ public class MainInterfaceController implements Initializable {
                 fileChooser.setInitialDirectory(new File("C:\\users"));
                 Stats.getItems().addAll(Positions.Centre, Positions.PowerForward, Positions.SmallForward, Positions.PointGuard, Positions.ShootingGuard);
         }
+
+
 }
