@@ -91,6 +91,9 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         private Color x4;
+        @FXML
+        private Label descriptionText;
+
 
         @FXML
         void addGame(MouseEvent event) {
@@ -157,7 +160,17 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         void viewPortfolio(ActionEvent event) {
-
+                playerSelect.getItems().clear();
+                for (Team teamstoadd : teams) {
+                        if (teamstoadd.equals(teamSelect.getValue())) {
+                                ArrayList<Player> players = teamstoadd.getPlayers();
+                                for (Player playerstoadd : players) {
+                                        if (playerstoadd.equals(playerSelect.getValue())) {
+                                                descriptionText.setText(playerstoadd.toString());
+                                        }
+                                }
+                        }
+                }
         }
 
         public void load (ActionEvent e) {
