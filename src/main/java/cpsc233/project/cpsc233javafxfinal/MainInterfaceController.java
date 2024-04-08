@@ -35,12 +35,16 @@ public class MainInterfaceController implements Initializable {
                 stage.show();
         }
         public void switchToAddGame(ActionEvent e) throws IOException {
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddGame.fxml"));
-                stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-                scene = new Scene(fxmlLoader.load());
-                stage.setTitle("Baller: The Basketball Tracking Program v1.3");
-                stage.setScene(scene);
-                stage.show();
+                Team team = teamSelect.getValue();
+                ArrayList<Player> players = team.getPlayers();
+                for (Player playerstoaddgame : players) {
+                        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddGame.fxml"));
+                        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                        scene = new Scene(fxmlLoader.load());
+                        stage.setTitle("Baller: The Basketball Tracking Program v1.3");
+                        stage.setScene(scene);
+                        stage.show();
+                }
         }
         public void switchToMainInterface(ActionEvent e) throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("Main.fxml"));
@@ -50,7 +54,7 @@ public class MainInterfaceController implements Initializable {
                 stage.setScene(scene);
                 stage.show();
         }
-        ArrayList<Team> teams = new ArrayList<>();
+        public ArrayList<Team> teams = new ArrayList<>();
         @FXML
         private Text ErrorText;
 
