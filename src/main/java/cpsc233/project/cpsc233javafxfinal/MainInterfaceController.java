@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -80,7 +81,25 @@ public class MainInterfaceController implements Initializable {
         }
 
         @FXML
-        void addPlayer(MouseEvent event) {
+        void addPlayer(ActionEvent event) {
+                if(teamSelect.getValue() == null){
+                        ErrorText.setText("Please select a team before adding a player");
+
+                }else{
+                        try {
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlayer.fxml"));
+                                Parent root = fxmlLoader.load();
+                                AddPlayerController addPlayerController = fxmlLoader.getController();
+                                addPlayerController.setParentController(this);
+                                Stage stage = new Stage();
+                                Scene scene = new Scene(root);
+                                stage.setScene(scene);
+                                stage.setTitle("Add Player");
+                                stage.showAndWait();
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                        }
+                }
 
         }
         public void setData4team(){
@@ -183,7 +202,7 @@ public class MainInterfaceController implements Initializable {
                 about.setContentText("""
                     Author: Gavin Walters, JJ Nelson, Dhruv Pujara;
                     Emails: gavin.walters@ucalgary.ca, jj.nelson@ucalgary.ca, dhruv.pujara1@ucalgary.ca
-                    UCID: 30142712, 30062571, [DHRUV UCID HERE]
+                    UCID: 30142712, 30062571, 30210700
                     Tutorial: T13
                     TA: Shanna Hollingworth
                     Program Version: v1.3""");
@@ -203,6 +222,19 @@ public class MainInterfaceController implements Initializable {
 
         }
 
+        private void openPlayerInputDialog() {
+                try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlayer.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(fxmlLoader.load());
+                        stage.setScene(scene);
+                        stage.setTitle("Add Player");
+                        stage.showAndWait();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
