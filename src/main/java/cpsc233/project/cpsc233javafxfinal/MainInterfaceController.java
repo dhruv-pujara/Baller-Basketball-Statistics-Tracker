@@ -36,15 +36,24 @@ public class MainInterfaceController implements Initializable {
         }
         public void switchToAddGame(ActionEvent e) throws IOException {
                 Team team = teamSelect.getValue();
-                ArrayList<Player> players = team.getPlayers();
-                for (Player playerstoaddgame : players) {
-                        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddGame.fxml"));
-                        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                        scene = new Scene(fxmlLoader.load());
+                if(team != null) {
+                        ArrayList<Player> players = team.getPlayers();
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddGame.fxml"));
+                        Parent root = fxmlLoader.load();
+
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
                         stage.setTitle("Baller: The Basketball Tracking Program v1.3");
                         stage.setScene(scene);
+                        for (Player playersToAddGame : players) {
+
+
+                        }
                         stage.show();
+                } else {
+                        ErrorText.setText("Please select a team before adding a game.");
                 }
+
         }
         public void switchToMainInterface(ActionEvent e) throws IOException {
                 FXMLLoader fxmlLoader = new FXMLLoader(OldMain.class.getResource("Main.fxml"));
