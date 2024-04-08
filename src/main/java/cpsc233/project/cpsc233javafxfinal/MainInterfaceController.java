@@ -93,8 +93,8 @@ public class MainInterfaceController implements Initializable {
                         try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlayer.fxml"));
                                 Parent root = fxmlLoader.load();
-                                AddPlayerController addPlayerController = fxmlLoader.getController();
-                                addPlayerController.setParentController(this);
+//                                AddPlayerController addPlayerController = fxmlLoader.getController();
+//                                addPlayerController.setParentController(this);
                                 Stage stage = new Stage();
                                 Scene scene = new Scene(root);
                                 stage.setScene(scene);
