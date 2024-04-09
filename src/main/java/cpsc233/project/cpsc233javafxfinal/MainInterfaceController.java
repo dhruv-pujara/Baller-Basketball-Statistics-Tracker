@@ -148,6 +148,7 @@ public class MainInterfaceController implements Initializable {
                                                 ErrorText.setText("There are no players currently made");
                                                 ErrorText.setTextFill(Color.RED);
                                         } else {
+                                                ErrorText.setText("");
                                                 descriptionText.setText(string);
                                         }
                                 }

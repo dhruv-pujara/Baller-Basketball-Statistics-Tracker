@@ -96,7 +96,7 @@
          <children>
             <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label fx:id="ErrorText" layoutX="7.0" layoutY="1.0" prefHeight="17.0" prefWidth="882.0" text="error go here" />
+                  <Label fx:id="ErrorText" layoutX="7.0" layoutY="1.0" prefHeight="17.0" prefWidth="882.0" />
                </children></Pane>
          </children>
          <padding>
