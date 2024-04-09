@@ -32,23 +32,34 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         private Scene scene;
+        Team team;
+
+        public void setTeam(Team team) {
+                this.team = team;
+                for(Team teamstoiterate: teams){
+                        if(teamstoiterate.getName().equals(team.getName())){
+                                teams.remove(teamstoiterate);
+                                teams.add(team);
+                        }
+                }
+        }
 
         public void switchToAddPlayer(ActionEvent e) throws IOException {
                 Team team = teamSelect.getValue();
                 if (team != null) {
-
                         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
                         Parent root = fxmlLoader.load();
                         addPlayerController controller = fxmlLoader.getController();
-
                         controller.initData(team);
-                        controller.setMainInterfaceController(this);
-
                         Stage stage = new Stage();
                         scene = new Scene(root);
                         stage.setTitle("Baller: The Basketball Tracking Program v1.3");
                         stage.setScene(scene);
-                        stage.show();
+                        stage.showAndWait();
+                        playerSelect.getItems().clear();
+                        for(Player players: team.getPlayers()) {
+                                playerSelect.getItems().add(players.getName());
+                        }
                 }else{
                         ErrorText.setText("No team selected");
                         ErrorText.setFill(Color.RED);
@@ -130,7 +141,7 @@ public class MainInterfaceController implements Initializable {
                 if (teams.isEmpty()) {
                         ErrorText.setText("There are no teams currently created.");
                         ErrorText.setFill(Color.RED);
-                }else {
+                } else {
                         for (Team teamstoiterate : teams) {
                                 if (!teamstoiterate.getPlayers().isEmpty()) {
                                         value = 0;
