@@ -3,18 +3,16 @@ package cpsc233.project.cpsc233javafxfinal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class addGameController {
 
@@ -25,14 +23,22 @@ public class addGameController {
         playerText.setText("Player: " + player.getName());
     }
 
-    private MainInterfaceController mainInterfaceController;
+    public void switchToMainInterface(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
 
+    //Variables and constants
     private Team team;
     private Player player;
 
-
+    //FXML ID inserts
     @FXML
-    private Label addGameErrortext;
+    private Text teamText;
+    @FXML
+    private Text playerText;
+    @FXML
+    private Label addGameErrorText;
     @FXML
     private TextField points;
     @FXML
@@ -43,26 +49,6 @@ public class addGameController {
     private TextField blocks;
     @FXML
     private TextField rebounds;
-    @FXML
-    private Text teamText;
-    @FXML
-    private Text playerText;
-
-
-    public void setTeamAndPlayer(Team team, Player player) {
-
-        this.team = team;
-        this.player = player;
-    }
-
-    public void setMainInterfaceController(MainInterfaceController mainInterfaceController) {
-        this.mainInterfaceController = mainInterfaceController;
-    }
-
-    public void switchToMainInterface(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
 
     @FXML
     public void saveGameStats(ActionEvent event) {
@@ -74,7 +60,8 @@ public class addGameController {
                 double reboundsStored = Double.parseDouble(rebounds.getText());
 
                 if (pointsStored < 0 || assistsStored < 0 || stealsStored < 0 || blocksStored < 0 || reboundsStored < 0) {
-                    addGameErrortext.setText("All Stats must be positive");
+                    addGameErrorText.setText("All Stats must be positive.");
+                    addGameErrorText.setTextFill(Color.RED);
                     return;
                 }
 
@@ -86,18 +73,29 @@ public class addGameController {
                 player.addGamecount(player.getGamecount());
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
-                Parent root = fxmlLoader.load();
                 MainInterfaceController controller = fxmlLoader.getController();
                 controller.setTeam(team);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
             } catch (NumberFormatException e) {
-                addGameErrortext.setText("Invalid input format.");
+                addGameErrorText.setText("Invalid input format - all inputs must be numbers.");
+                addGameErrorText.setTextFill(Color.RED);
                 return;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
+                unaccountedError(e);
             }
     }
-
+    public void unaccountedError (Exception e){
+        //Here just in case something else happens
+        //Should never be triggered, but you never know!
+        Alert leave = new Alert(Alert.AlertType.ERROR);
+        leave.setTitle("An Error Has Occurred :" + e);
+        leave.setHeaderText("""
+                An unexpected error has occurred. The program will now close.
+                """);
+        leave.showAndWait();
+        leave.close();
+        System.exit(1);
+    }
 
 }

@@ -49,7 +49,7 @@
          <children>
             <AnchorPane prefHeight="23.0" prefWidth="342.0">
                <children>
-                  <Label fx:id="addGameErrortext" layoutX="7.0" layoutY="3.0" prefHeight="18.0" prefWidth="328.0" />
+                  <Label fx:id="addGameErrorText" layoutX="7.0" layoutY="3.0" prefHeight="18.0" prefWidth="414.0" />
                </children>
             </AnchorPane>
          </children>

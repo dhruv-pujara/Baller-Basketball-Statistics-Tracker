@@ -24,26 +24,14 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainInterfaceController implements Initializable {
-        public FileChooser fileChooser = new FileChooser();
-
-        //CODE TO HAVE MULTIPLE SCENES
-        @FXML
-        private Stage stage;
-
-        @FXML
-        private Scene scene;
-        Team team;
-
-        public void setTeam(Team team) {
-                this.team = team;
-                for(Team teamstoiterate: teams){
-                        if(teamstoiterate.getName().equals(team.getName())){
-                                teams.remove(teamstoiterate);
-                                teams.add(team);
-                        }
-                }
+        //Initalize function for Directories and Choiceboxes
+        @Override
+        public void initialize(URL url, ResourceBundle resourceBundle) {
+                fileChooser.setInitialDirectory(new File("C:\\users"));
+                Stats.getItems().addAll(StatsType.POINTS, StatsType.ASSISTS, StatsType.BLOCKS, StatsType.REBOUNDS, StatsType.STEALS);
         }
 
+        //switches to AddPlayer scene to add players
         public void switchToAddPlayer(ActionEvent e) throws IOException {
                 Team team = teamSelect.getValue();
                 if (team != null) {
@@ -62,10 +50,11 @@ public class MainInterfaceController implements Initializable {
                         }
                 }else{
                         ErrorText.setText("No team selected");
-                        ErrorText.setFill(Color.RED);
+                        ErrorText.setTextFill(Color.RED);
                 }
         }
 
+        //Switches to addGame scene to add game
         @FXML
         public void switchToAddGame(ActionEvent e) throws IOException {
                 Team team = teamSelect.getValue();
@@ -89,64 +78,63 @@ public class MainInterfaceController implements Initializable {
                         }
                         } else {
                                 ErrorText.setText("Cannot add a game. Please add players to the team first.");
+                                ErrorText.setTextFill(Color.RED);
                         }
                 } else {
                         ErrorText.setText("Please select a team before adding a game.");
+                        ErrorText.setTextFill(Color.RED);
 
                 }
         }
-        @FXML
-        public void switchToMainInterface(ActionEvent e) throws IOException {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Main.fxml"));
-                stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-                scene = new Scene(fxmlLoader.load());
-                stage.setTitle("Baller: The Basketball Tracking Program v1.3");
-                stage.setScene(scene);
-                stage.show();
-        }
+
+        //Variables and constants
+        public FileChooser fileChooser = new FileChooser();
         public ArrayList<Team> teams = new ArrayList<>();
-        @FXML
-        private Text ErrorText;
-
-        @FXML
-        private ComboBox<StatsType> Stats;
-
+        public Team team;
         private String fileName;
 
+
+        //FXML ID inserts
         @FXML
-        private ComboBox<String> playerSelect;
+        private Scene scene;
+
+        @FXML
+        private Label ErrorText;
+
+        @FXML
+        private Label descriptionText;
 
         @FXML
         private TextField teamName;
 
         @FXML
+        private ComboBox<StatsType> Stats;
+
+        @FXML
+        private ComboBox<String> playerSelect;
+
+        @FXML
         private ComboBox<Team> teamSelect;
 
-        @FXML
-        private Font x1;
-
-        @FXML
-        private Color x2;
-
-        @FXML
-        private Font x3;
-
-        @FXML
-        private Color x4;
-        @FXML
-        private Label descriptionText;
 
 
-        @FXML
-        void addGame(MouseEvent event) {
 
+        //Sets team
+        public void setTeam(Team team) {
+                this.team = team;
+                for(Team teamstoiterate: teams){
+                        if(teamstoiterate.getName().equals(team.getName())){
+                                teams.remove(teamstoiterate);
+                                teams.add(team);
+                        }
+                }
         }
         @FXML
         void statBest(MouseEvent event) {
                 int value = 1;
                 if (teams.isEmpty()) {
                         ErrorText.setText("There are no teams currently created.");
-                        ErrorText.setFill(Color.RED);
+                        ErrorText.setTextFill(Color.RED);
                 } else {
                         for (Team teamstoiterate : teams) {
                                 if (!teamstoiterate.getPlayers().isEmpty()) {
@@ -156,19 +144,19 @@ public class MainInterfaceController implements Initializable {
                         if (value == 0) {
                                 if(Stats.getValue() == null){
                                         ErrorText.setText("There is no stat selected: Please select a stat");
-                                        ErrorText.setFill(Color.RED);
+                                        ErrorText.setTextFill(Color.RED);
                                 }else {
                                         String string = Evaluations.TopPlayerStat(teams, Stats.getValue());
                                         if (string.isEmpty()) {
                                                 ErrorText.setText("There are no players currently made");
-                                                ErrorText.setFill(Color.RED);
+                                                ErrorText.setTextFill(Color.RED);
                                         } else {
                                                 descriptionText.setText(string);
                                         }
                                 }
                         }else{
                                 ErrorText.setText("There are no players currently made");
-                                ErrorText.setFill(Color.RED);
+                                ErrorText.setTextFill(Color.RED);
                         }
                 }
         }
@@ -177,6 +165,7 @@ public class MainInterfaceController implements Initializable {
                 int value = 1;
                 if (teams.isEmpty()){
                         ErrorText.setText("There are no teams currently created.");
+                        ErrorText.setTextFill(Color.RED);
                 }else {
                         for (Team teamstoiterate : teams) {
                                 if (!teamstoiterate.getPlayers().isEmpty()) {
@@ -198,7 +187,7 @@ public class MainInterfaceController implements Initializable {
                                         Evaluations.topOffTopDefForPosition(teams, Positions.PointGuard));
                         }else{
                                 ErrorText.setText("There are no players currently made");
-                                ErrorText.setFill(Color.RED);
+                                ErrorText.setTextFill(Color.RED);
                         }
                 }
         }
@@ -215,19 +204,19 @@ public class MainInterfaceController implements Initializable {
                 ErrorText.setText("Welcome to Baller!");
                 if (teamName.getText().isEmpty()) {
                         ErrorText.setText("Error: No team name given");
-                        ErrorText.setFill(Color.RED);
+                        ErrorText.setTextFill(Color.RED);
                 } else {
                         for (Team teamnames : teams) {
                                 if (teamnames.getName().equals(teamName.getText())) {
                                         ErrorText.setText("Invalid team, team with this name already exists.");
-                                        ErrorText.setFill(Color.RED);
+                                        ErrorText.setTextFill(Color.RED);
                                 }
                         }
                         if (!ErrorText.getText().equals("Invalid team, team with this name already exists.")) {
                                 ArrayList<Player> players = new ArrayList<>();
                                 Team team = new Team(players, teamName.getText());
                                 ErrorText.setText("Team " + team.getName() + " has been added!");
-                                ErrorText.setFill(Color.BLACK);
+                                ErrorText.setTextFill(Color.BLACK);
                                 teams.add(team);
                                 setData4team();
                         }
@@ -255,6 +244,20 @@ public class MainInterfaceController implements Initializable {
                         }
                 }
         }
+        @FXML
+        void playerChange(ActionEvent event) {
+                playerSelect.getItems().clear();
+                for(Team teamstoadd: teams){
+                        if(teamstoadd.equals(teamSelect.getValue())){
+                                ArrayList<Player> players = teamstoadd.getPlayers();
+                                for(Player playerstoadd: players){
+                                        playerSelect.getItems().add(playerstoadd.getName());
+                                }
+                        }
+                }
+
+        }
+
         public void load (ActionEvent e) {
                 //Prompts a text dialog and asks user for file name to load from
                 try {
@@ -264,18 +267,18 @@ public class MainInterfaceController implements Initializable {
                         teams.addAll(newteams);
                         setData4team();
                         ErrorText.setText("Sucessfully Loaded File!");
-                        ErrorText.setFill(Color.BLACK);
-                        }catch (FileNotFoundException f){
+                        ErrorText.setTextFill(Color.BLACK);
+                        }catch (FileNotFoundException err){
                                 ErrorText.setText("File not found- please create a file and try again.");
-                                ErrorText.setFill(Color.RED);
-                        }catch (RuntimeException f){
+                                ErrorText.setTextFill(Color.RED);
+                        }catch (RuntimeException err){
                                 ErrorText.setText("File invalid- please create a file and try again.");
-                                ErrorText.setFill(Color.RED);
+                                ErrorText.setTextFill(Color.RED);
                         }
         }
 
         public void save (ActionEvent e) throws FileNotFoundException {
-                if (!fileName.isEmpty()) {
+                if (fileName == null) {
                         fileChooser.setInitialFileName(fileName);
                 }
                 //Prompts a text dialog and asks user for a file name to save too
@@ -284,9 +287,10 @@ public class MainInterfaceController implements Initializable {
                         try {
                                 CustomFileReader.saveFile(file, teams);
                                 ErrorText.setText("You have successfully saved your data to " + file.getName());
-                        } catch (FileNotFoundException g) {
+                                ErrorText.setTextFill(Color.BLACK);
+                        } catch (FileNotFoundException err) {
                                 ErrorText.setText("Invalid File name input: try again");
-                                ErrorText.setFill(Color.RED);
+                                ErrorText.setTextFill(Color.RED);
                         }
                 }
         }
@@ -330,26 +334,5 @@ public class MainInterfaceController implements Initializable {
                     Program Version: v1.3""");
                 about.show();
         }
-        @FXML
-        void playerChange(ActionEvent event) {
-                playerSelect.getItems().clear();
-                for(Team teamstoadd: teams){
-                        if(teamstoadd.equals(teamSelect.getValue())){
-                                ArrayList<Player> players = teamstoadd.getPlayers();
-                                for(Player playerstoadd: players){
-                                        playerSelect.getItems().add(playerstoadd.getName());
-                                }
-                        }
-                }
-
-        }
-
-
-        @Override
-        public void initialize(URL url, ResourceBundle resourceBundle) {
-                fileChooser.setInitialDirectory(new File("C:\\users"));
-                Stats.getItems().addAll(StatsType.POINTS, StatsType.ASSISTS, StatsType.BLOCKS, StatsType.REBOUNDS, StatsType.STEALS);
-        }
-
-
+        //I would add the UnaccountedException file here, but all of them in this area have been covered by other means!
 }

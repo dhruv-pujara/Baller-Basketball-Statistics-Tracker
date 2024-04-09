@@ -5,20 +5,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cpsc233.project.cpsc233javafxfinal.addPlayerController">
+
+<VBox prefHeight="478.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cpsc233.project.cpsc233javafxfinal.addPlayerController">
    <children>
-      <Button layoutX="501.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMainInterface" onMouseClicked="#mainMenu" text="back to main" />
-      <TextField fx:id="playerName" layoutX="223.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0" />
-      <TextField fx:id="playerNumber" layoutX="223.0" layoutY="188.0" />
-      <Label layoutX="90.0" layoutY="133.0" prefHeight="17.0" prefWidth="85.0" text="Players Name" />
-      <Label layoutX="90.0" layoutY="192.0" text="Number" />
-      <Label layoutX="90.0" layoutY="252.0" prefHeight="17.0" prefWidth="66.0" text="Position" />
-      <Text fx:id="IntroText" layoutX="143.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adding Player to team [team]" wrappingWidth="310.13671875" />
-      <ComboBox fx:id="positions" layoutX="223.0" layoutY="248.0" prefWidth="150.0" />
-      <Button layoutX="223.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#addtoTeam" prefHeight="25.0" prefWidth="149.0" text="Add Player" />
-      <Text fx:id="erroraddPlayertext" layoutX="14.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adding Player..." wrappingWidth="91.13671875" />
-<!--      <Button layoutX="313.0" layoutY="14.0" mnemonicParsing="false" onAction="#addPlayerButtonClicked" prefHeight="17.0" prefWidth="39.0" text="OK!" />-->
+      <AnchorPane prefHeight="346.0" prefWidth="600.0">
+         <children>
+            <Button layoutX="494.0" layoutY="359.0" mnemonicParsing="false" onAction="#switchToMainInterface" text="back to main" />
+            <TextField fx:id="playerName" layoutX="223.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="playerNumber" layoutX="223.0" layoutY="188.0" />
+            <Label layoutX="90.0" layoutY="133.0" prefHeight="17.0" prefWidth="85.0" text="Players Name" />
+            <Label layoutX="90.0" layoutY="192.0" text="Number" />
+            <Label layoutX="90.0" layoutY="252.0" prefHeight="17.0" prefWidth="66.0" text="Position" />
+            <ComboBox fx:id="positions" layoutX="223.0" layoutY="248.0" prefWidth="150.0" />
+            <Button layoutX="223.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#addtoTeam" prefHeight="25.0" prefWidth="149.0" text="Add Player" />
+            <Label fx:id="IntroText" layoutX="260.0" layoutY="80.0" text="Adding Player to team [team]" />
+      <!--      <Button layoutX="313.0" layoutY="14.0" mnemonicParsing="false" onAction="#addPlayerButtonClicked" prefHeight="17.0" prefWidth="39.0" text="OK!" />-->
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="erroraddPlayertext" layoutX="62.0" layoutY="38.0" text="Adding player..." />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</VBox>
