@@ -65,9 +65,13 @@ public class MainInterfaceController implements Initializable {
                         ErrorText.setFill(Color.RED);
                 }
         }
+
+        @FXML
         public void switchToAddGame(ActionEvent e) throws IOException {
+                System.out.println("Switching to Add Game...");
                 Team team = teamSelect.getValue();
                 if (team != null) {
+                        if(!team.getPlayers().isEmpty()){
                         for (Player players : team.getPlayers()) {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddGame.fxml"));
                                 Parent root = fxmlLoader.load();
@@ -82,7 +86,9 @@ public class MainInterfaceController implements Initializable {
                                 stage.setTitle("Baller: The Basketball Tracking Program v1.3");
                                 stage.setScene(scene);
                                 stage.show();
-
+                        }
+                        } else {
+                                ErrorText.setText("Cannot add a game. Please add players to the team first.");
                         }
                 } else {
                         ErrorText.setText("Please select a team before adding a game.");

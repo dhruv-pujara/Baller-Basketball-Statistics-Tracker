@@ -48,13 +48,14 @@ public class addGameController implements Initializable {
     private Text playerText;
 
 
-    public void setTeam(Team team) {
+    public void setTeamAndPlayer(Team team, Player player) {
+
         this.team = team;
+        this.player = player;
     }
 
     public void setMainInterfaceController(MainInterfaceController mainInterfaceController) {
         this.mainInterfaceController = mainInterfaceController;
-//        this.player = player;
     }
 
     public void switchToMainInterface(ActionEvent event) {
