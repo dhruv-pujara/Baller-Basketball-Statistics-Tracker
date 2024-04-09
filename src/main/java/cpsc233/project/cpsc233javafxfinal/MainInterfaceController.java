@@ -215,6 +215,7 @@ public class MainInterfaceController implements Initializable {
                                 Team team = new Team(players, teamName.getText());
                                 ErrorText.setText("Team " + team.getName() + " has been added!");
                                 ErrorText.setTextFill(Color.BLACK);
+                                teamName.clear();
                                 teams.add(team);
                                 setData4team();
                         }
