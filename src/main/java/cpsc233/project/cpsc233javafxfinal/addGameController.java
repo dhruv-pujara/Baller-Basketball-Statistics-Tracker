@@ -13,9 +13,9 @@ import java.io.IOException;
 
 public class addGameController {
 
-    public void initData(Team team) {
+    public void initData(Team team, Player player) {
         this.team = team;
-//        this.player = player;
+        this.player = player;
 //        teamLabel.setText("Team: " + team.getName());
 //        playerLabel.setText("Player: " + player.getName());
     }
@@ -59,12 +59,6 @@ public class addGameController {
 
     @FXML
     public void saveGameStats(ActionEvent event) {
-
-        if (team == null) {
-            System.err.println("Team is not initialized");
-            return;
-        }
-        for (Player player : team.getPlayers()) {
             try {
                 double pointsStored = Double.parseDouble(points.getText());
                 double assistsStored = Double.parseDouble(assists.getText());
@@ -85,14 +79,12 @@ public class addGameController {
 
                 player.addGamecount(player.getGamecount());
 
-                System.out.println("Updated stats for " + player.getName() + ":");
-                System.out.println("Points: " + player.getPoints().getStats());
-                System.out.println("Assists: " + player.getAssists().getStats());
-                System.out.println("Steals: " + player.getSteals().getStats());
-                System.out.println("Blocks: " + player.getBlocks().getStats());
-                System.out.println("Rebounds: " + player.getRebounds().getStats());
-
                 player.addGamecount(player.getGamecount());
+                team.addPlayer(player);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.close();
+
+
             } catch (NumberFormatException e) {
                 addGameErrortext.setText("Invalid input format.");
                 return;
@@ -100,4 +92,3 @@ public class addGameController {
         }
 
     }
-}

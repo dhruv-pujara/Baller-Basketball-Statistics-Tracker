@@ -1,18 +1,76 @@
 package cpsc233.project.cpsc233javafxfinal;
 
-public class addPlayerController {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class addPlayerController implements Initializable {
 
     private MainInterfaceController mainInterfaceController;
     private Team team;
     private Player player;
+    @FXML
+    private TextField playerName;
 
-    public void initData(Team team, Player player) {
+    @FXML
+    private TextField playerNumber;
+    @FXML
+    private Text IntroText;
+    @FXML
+    private Text erroraddPlayertext;
+
+    @FXML
+    void addtoTeam(MouseEvent event) {
+        try {
+            ArrayList<Double> stats = new ArrayList<>();
+            int gamecount = 0;
+            int prior = 0;
+            Stats points = new Stats(stats, StatsType.POINTS);
+            Stats assists = new Stats(stats, StatsType.ASSISTS);
+            Stats steals = new Stats(stats, StatsType.STEALS);
+            Stats blocks = new Stats(stats, StatsType.BLOCKS);
+            Stats rebounds = new Stats(stats, StatsType.REBOUNDS);
+            Player player = new Player(Integer.parseInt(playerNumber.getText()), playerName.getText(), positions.getValue(), points, assists, blocks, rebounds, steals, gamecount, prior);
+            team.addPlayer(player);
+        } catch (NumberFormatException e) {
+            erroraddPlayertext.setText("Invalid input format.");
+
+        }
+    }
+
+    @FXML
+    private ComboBox<Positions> positions;
+
+    @FXML
+    void mainMenu(MouseEvent event) {
+
+    }
+
+    @FXML
+    void switchToMainInterface(ActionEvent event) {
+
+    }
+
+    public void initData(Team team) {
         this.team = team;
-        this.player = player;
     }
 
     public void setMainInterfaceController(MainInterfaceController mainInterfaceController) {
         this.mainInterfaceController = mainInterfaceController;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        positions.getItems().addAll(Positions.ShootingGuard, Positions.Centre, Positions.PointGuard, Positions.PowerForward, Positions.SmallForward);
+        IntroText.setText("Adding Player to Team " + team.getName());
     }
 
 }
