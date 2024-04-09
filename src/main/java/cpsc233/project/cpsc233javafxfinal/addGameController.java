@@ -12,8 +12,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 
-import java.io.IOException;
-
 public class addGameController {
 
     public void initData(Team team, Player player) {
@@ -73,14 +71,15 @@ public class addGameController {
                 player.addGamecount(player.getGamecount());
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
+                Parent root = fxmlLoader.load();
                 MainInterfaceController controller = fxmlLoader.getController();
                 controller.setTeam(team);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
+
             } catch (NumberFormatException e) {
                 addGameErrorText.setText("Invalid input format - all inputs must be numbers.");
                 addGameErrorText.setTextFill(Color.RED);
-                return;
             } catch (Exception e) {
                 unaccountedError(e);
             }
@@ -89,7 +88,7 @@ public class addGameController {
         //Here just in case something else happens
         //Should never be triggered, but you never know!
         Alert leave = new Alert(Alert.AlertType.ERROR);
-        leave.setTitle("An Error Has Occurred :" + e);
+        leave.setTitle("An Error Has Occurred:" + e.toString());
         leave.setHeaderText("""
                 An unexpected error has occurred. The program will now close.
                 """);

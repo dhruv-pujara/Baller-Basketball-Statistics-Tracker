@@ -4,14 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -227,10 +224,15 @@ public class MainInterfaceController implements Initializable {
         void lastgameStats(MouseEvent event) {
                 Team team = teamSelect.getValue();
                 for(Player players: team.getPlayers()){
-                        if(players.getName().equals(playerSelect.getValue())){
-                                Player player = players;
-                                descriptionText.setText(Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
+                        if(players.getName().equals(playerSelect.getValue())) {
+                                if (players.getGamecount() < 1) {
+                                        descriptionText.setText("This player has played no games!");
+                                } else {
+                                        Player player = players;
+                                        descriptionText.setText(Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
+                                }
                         }
+
                 }
         }
 
