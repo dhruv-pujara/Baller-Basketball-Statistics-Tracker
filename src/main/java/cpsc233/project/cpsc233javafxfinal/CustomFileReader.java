@@ -90,7 +90,7 @@ public class CustomFileReader extends Reader {
                         Positions position = Positions.valueOf(values[3]);
 
                         // Create Player object and add it to the team
-                        Player player = new Player(Integer.parseInt(values[2]), values[1], position, pointsforplayer, assistsforplayer, blocksforplayer, stealsforplayer, reboundsforplayer, gamesplayed, gamesplayed);
+                        Player player = new Player(Integer.parseInt(values[2]), values[1], position, pointsforplayer, assistsforplayer, blocksforplayer,  reboundsforplayer, stealsforplayer, gamesplayed, gamesplayed);
                         teams.addPlayer(player);
                     }
                 }

@@ -175,8 +175,8 @@ public class Evaluations{
      */
     public static String topOffTopDefForPosition(ArrayList<Team> teamlist, Positions position){
         String eval;
-        HashMap<Double, String> TopPlayersOff = new HashMap<>();
-        HashMap<Double, String> TopPlayersDef = new HashMap<>();
+        HashMap<Double, Player> TopPlayersOff = new HashMap<>();
+        HashMap<Double, Player> TopPlayersDef = new HashMap<>();
         ArrayList<Double> OffStorage = new ArrayList<>();
         ArrayList<Double> DefStorage = new ArrayList<>();
         for(Team teams: teamlist) {
@@ -189,8 +189,8 @@ public class Evaluations{
                     Stats rebounds = players.getRebounds();
                     Double meanoff = meansfoeval(points, assists, players.getGamecount(), players.getPriotgamecount());
                     Double meandef = meansforeval(rebounds, steals, blocks, players.getGamecount(), players.getPriotgamecount());
-                    TopPlayersOff.put(meanoff, players.getName());
-                    TopPlayersDef.put(meandef, players.getName());
+                    TopPlayersOff.put(meanoff, players);
+                    TopPlayersDef.put(meandef, players);
                     OffStorage.add(meanoff);
                     DefStorage.add(meandef);
                 }
@@ -199,13 +199,12 @@ public class Evaluations{
             if (OffStorage.isEmpty()) {
                 System.out.println("There is no player with this position currently");
             } else {
-                Double maxoff = Collections.max(OffStorage);
-                OffStorage.add(0, maxoff);
-                Double maxdef = Collections.max(DefStorage);
-                DefStorage.add(0, maxdef);
-                String TopOff = TopPlayersOff.get(OffStorage.get(0));
-                String TopDef = TopPlayersDef.get(DefStorage.get(0));
-                eval = "Offensive All Star: " + TopOff + "\n" + "Defensive All Star: " + TopDef;
+                Collections.sort(OffStorage);
+                Collections.sort(DefStorage);
+                Player TopOff = TopPlayersOff.get(OffStorage.getLast());
+                Player TopDef = TopPlayersDef.get(DefStorage.getLast());
+                //JJ                                                            here                                                                                                                              here
+                eval = "Offensive All Star: " + TopOff.getName() + " with " + OffStorage.getLast() + " average between points and assists" + "\n" + "Defensive All Star: " + TopDef.getName() + " with " + DefStorage.getLast() + " average between steals, rebounds and blocks";
                 return eval;
             }
 return null;
@@ -218,7 +217,7 @@ return null;
      */
     public static String TopPlayerStat(ArrayList<Team> teamlist, StatsType statsType){
         String top = "";
-    HashMap<Double, String> TopPlayersStats = new HashMap<>();
+    HashMap<Double, Player> TopPlayersStats = new HashMap<>();
     ArrayList<Stats> statsforcomparison = new ArrayList<Stats>();
     ArrayList<Double> Statsstorage = new ArrayList<>();
     for(Team teams: teamlist) {
@@ -236,19 +235,19 @@ return null;
             for (Stats statsfound : statsforcomparison) {
                 if (statsfound.getType() == statsType) {
                     Double mean = statsfound.getMean(players.getGamecount(), players.getPriotgamecount());
-                    TopPlayersStats.put(mean, players.getName());
+                    TopPlayersStats.put(mean, players);
                     Statsstorage.add(mean);
+
                 }
-            }
+            }statsforcomparison.clear();
         }
     }
         if (Statsstorage.isEmpty()) {
             return null;
         } else {
-            Double maxoff = Collections.max(Statsstorage);
-            Statsstorage.add(0, maxoff);
-            String TopStats = TopPlayersStats.get(Statsstorage.get(0));
-            top = "Best player in " + statsType + ": " + TopStats;
+            Collections.sort(Statsstorage);
+            Player Topplayer = TopPlayersStats.get(Statsstorage.getLast());
+            top = "Best player in " + statsType + ": " + Topplayer.getName() + " with " + Statsstorage.getLast();
         }
         return top;
 }

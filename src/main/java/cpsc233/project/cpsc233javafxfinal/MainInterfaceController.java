@@ -133,7 +133,7 @@ public class MainInterfaceController implements Initializable {
                                 }
                         }
                         if (value == 0) {
-                                if(teamSelect.getValue() == null){
+                                if(Stats.getValue() == null){
                                         ErrorText.setText("There is no stat selected: Please select a stat");
                                         ErrorText.setFill(Color.RED);
                                 }else {
@@ -142,7 +142,7 @@ public class MainInterfaceController implements Initializable {
                                                 ErrorText.setText("There are no players currently made");
                                                 ErrorText.setFill(Color.RED);
                                         } else {
-                                                descriptionText.setText(Evaluations.TopPlayerStat(teams, Stats.getValue()));
+                                                descriptionText.setText(string);
                                         }
                                 }
                         }else{
