@@ -68,7 +68,6 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         public void switchToAddGame(ActionEvent e) throws IOException {
-                System.out.println("Switching to Add Game...");
                 Team team = teamSelect.getValue();
                 if (team != null) {
                         if(!team.getPlayers().isEmpty()){

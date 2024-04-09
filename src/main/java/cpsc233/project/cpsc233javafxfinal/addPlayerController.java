@@ -33,7 +33,6 @@ public class addPlayerController implements Initializable {
     @FXML
     void addtoTeam(MouseEvent event) {
         try {
-            System.out.println(team.toString());
             ArrayList<Double> pointsstats = new ArrayList<>();
             ArrayList<Double> assistsstats = new ArrayList<>();
             ArrayList<Double> stealssstats = new ArrayList<>();
