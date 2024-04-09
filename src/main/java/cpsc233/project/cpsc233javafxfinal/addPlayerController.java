@@ -13,16 +13,32 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for adding player
+ */
 public class addPlayerController implements Initializable {
+
+    // Method to initialize the controller
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Adds positions to the ComboBox when initializing
         positions.getItems().addAll(Positions.ShootingGuard, Positions.Centre, Positions.PointGuard, Positions.PowerForward, Positions.SmallForward);
     }
+
+    /**
+     * Initializes the controller with the team data.
+     * @param team The team to which the player is being added.
+     */
     public void initData(Team team) {
         this.team = team;
         IntroText.setText("Adding a player to Team " + team.getName() + ":");
         erroraddPlayertext.setTextFill(Color.BLACK);
     }
+
+    /**
+     * Method to switch back to the main interface
+     * @param event The ActionEvent triggered by the "Back to Main" button.
+     */
     @FXML
     void switchToMainInterface(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -43,6 +59,10 @@ public class addPlayerController implements Initializable {
     @FXML
     private ComboBox<Positions> positions;
 
+    /**
+     * Adds a player to the team with the provided details.
+     * @param event The MouseEvent triggered by the "Add Player" button.
+     */
     @FXML
     void addtoTeam(MouseEvent event) {
         try {
@@ -53,6 +73,7 @@ public class addPlayerController implements Initializable {
                 erroraddPlayertext.setText("PLayer name cannot be empty.");
                 erroraddPlayertext.setTextFill(Color.RED);
             } else {
+                // Creating player object with provided details
                 ArrayList<Double> pointsstats = new ArrayList<>();
                 ArrayList<Double> assistsstats = new ArrayList<>();
                 ArrayList<Double> stealssstats = new ArrayList<>();
@@ -66,9 +87,11 @@ public class addPlayerController implements Initializable {
                 Stats blocks = new Stats(blocksstats, StatsType.BLOCKS);
                 Stats rebounds = new Stats(reboundsstats, StatsType.REBOUNDS);
                 Player player = new Player(Integer.parseInt(playerNumber.getText()), playerName.getText(), positions.getValue(), points, assists, blocks, rebounds, steals, gamecount, prior);
+                // Adding player to the team
                 team.addPlayer(player);
                 erroraddPlayertext.setText("Player " + playerName.getText() +" has been added!");
                 erroraddPlayertext.setTextFill(Color.BLACK);
+                // Clearing text fields and ComboBox
                 playerName.setText(null);
                 playerNumber.setText(null);
                 positions.setValue(null);
@@ -83,6 +106,10 @@ public class addPlayerController implements Initializable {
     }
 
 
+    /**
+     * Handles unaccounted errors.
+     * @param e he Exception object representing the error.
+     */
     public void unaccountedError (Exception e){
         //Here just in case something else happens
         //Should never be triggered, but you never know!

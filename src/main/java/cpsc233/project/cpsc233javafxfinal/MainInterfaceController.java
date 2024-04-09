@@ -46,6 +46,7 @@ public class MainInterfaceController implements Initializable {
                                 playerSelect.getItems().add(players.getName());
                         }
                         ErrorText.setText("Players successfully added to team " + team.getName());
+                        ErrorText.setTextFill(Color.BLACK);
                 }else{
                         ErrorText.setText("No team selected");
                         ErrorText.setTextFill(Color.RED);
@@ -69,6 +70,7 @@ public class MainInterfaceController implements Initializable {
                                 stage.setScene(scene);
                                 stage.showAndWait();
                                 ErrorText.setText("Game successfully added for team " + team.getName());
+                                ErrorText.setTextFill(Color.BLACK);
                                 if (team.getPlayers().size() == 1) {
                                         descriptionText.setText(players.toString());
                                 }else{
