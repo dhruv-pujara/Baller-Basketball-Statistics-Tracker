@@ -52,6 +52,7 @@ public class addPlayerController implements Initializable {
     @FXML
     void mainMenu(MouseEvent event) {
 
+
     }
 
     @FXML

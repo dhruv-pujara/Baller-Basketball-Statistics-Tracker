@@ -3,15 +3,19 @@ package cpsc233.project.cpsc233javafxfinal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class addGameController {
+public class addGameController implements Initializable {
 
     public void initData(Team team, Player player) {
         this.team = team;
@@ -39,9 +43,10 @@ public class addGameController {
     @FXML
     private TextField rebounds;
     @FXML
-    private Label teamLabel;
+    private Text teamText;
     @FXML
-    private Label playerLabel;
+    private Text playerText;
+
 
     public void setTeam(Team team) {
         this.team = team;
@@ -91,4 +96,9 @@ public class addGameController {
             }
         }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        teamText.setText("Adding game for team " + team);
+        playerText.setText(player.getName());
     }
+}

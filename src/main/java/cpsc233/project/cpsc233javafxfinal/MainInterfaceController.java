@@ -36,6 +36,7 @@ public class MainInterfaceController implements Initializable {
         public void switchToAddPlayer(ActionEvent e) throws IOException {
                 Team team = teamSelect.getValue();
                 if (team != null) {
+
                         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
                         Parent root = fxmlLoader.load();
                         addPlayerController controller = fxmlLoader.getController();
@@ -48,6 +49,9 @@ public class MainInterfaceController implements Initializable {
                         stage.setTitle("Baller: The Basketball Tracking Program v1.3");
                         stage.setScene(scene);
                         stage.show();
+                }else{
+                        ErrorText.setText("No team selected");
+                        ErrorText.setFill(Color.RED);
                 }
         }
         public void switchToAddGame(ActionEvent e) throws IOException {
@@ -182,28 +186,6 @@ public class MainInterfaceController implements Initializable {
                 }
         }
 
-        @FXML
-        void addPlayer(ActionEvent event) {
-                if(teamSelect.getValue() == null){
-                        ErrorText.setText("Please select a team before adding a player");
-
-                }else{
-                        try {
-                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlayer.fxml"));
-                                Parent root = fxmlLoader.load();
-//                                AddPlayerController addPlayerController = fxmlLoader.getController();
-//                                addPlayerController.setParentController(this);
-                                Stage stage = new Stage();
-                                Scene scene = new Scene(root);
-                                stage.setScene(scene);
-                                stage.setTitle("Add Player");
-                                stage.showAndWait();
-                        } catch (IOException e) {
-                                e.printStackTrace();
-                        }
-                }
-
-        }
         public void setData4team(){
                 teamSelect.getItems().clear();
                 for(Team teamstoadd: teams){
@@ -345,19 +327,6 @@ public class MainInterfaceController implements Initializable {
 
         }
 
-        private void openPlayerInputDialog() {
-                try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlayer.fxml"));
-                        Parent root = fxmlLoader.load();
-                        Stage stage = new Stage();
-                        Scene scene = new Scene(fxmlLoader.load());
-                        stage.setScene(scene);
-                        stage.setTitle("Add Player");
-                        stage.showAndWait();
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
-        }
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {

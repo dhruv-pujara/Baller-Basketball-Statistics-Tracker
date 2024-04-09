@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cpsc233.project.cpsc233javafxfinal.MainInterfaceController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cpsc233.project.cpsc233javafxfinal.addPlayerController">
    <children>
       <Button layoutX="501.0" layoutY="360.0" mnemonicParsing="false" onAction="#switchToMainInterface" onMouseClicked="#mainMenu" text="back to main" />
       <TextField fx:id="playerName" layoutX="223.0" layoutY="129.0" prefHeight="25.0" prefWidth="149.0" />
