@@ -25,11 +25,11 @@
             <TextField fx:id="blocks" layoutX="100.0" layoutY="150.0" prefHeight="11.0" prefWidth="86.0" />
             <TextField fx:id="rebounds" layoutX="100.0" layoutY="178.0" prefHeight="11.0" prefWidth="86.0" />
             <Button layoutX="96.0" layoutY="216.0" mnemonicParsing="false" onAction="#saveGameStats" prefHeight="22.0" prefWidth="86.0" text="Add Game" />
-            <Text fx:id="teamText" layoutX="29.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adding game for [team]" wrappingWidth="162.93670654296875">
+            <Text fx:id="teamText" layoutX="28.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adding game for [team]" wrappingWidth="299.73667907714844">
                <font>
                   <Font size="13.0" />
                </font></Text>
-            <Text fx:id="playerText" layoutX="29.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Player]" wrappingWidth="134.13671875">
+            <Text fx:id="playerText" layoutX="28.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Player]" wrappingWidth="299.7366790771482">
                <font>
                   <Font size="13.0" />
                </font></Text>

@@ -17,7 +17,7 @@ public class addGameController {
     public void initData(Team team, Player player) {
         this.team = team;
         this.player = player;
-        teamText.setText("Adding game for team " + team.getName());
+        teamText.setText("Adding game for Team " + team.getName());
         playerText.setText("Player: " + player.getName());
     }
 
