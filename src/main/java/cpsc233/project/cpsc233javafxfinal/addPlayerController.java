@@ -48,6 +48,9 @@ public class addPlayerController implements Initializable {
             if (positions.getValue() == null) {
                 erroraddPlayertext.setText("Position not selected.");
                 erroraddPlayertext.setTextFill(Color.RED);
+            } else if(playerName.getText().trim().isEmpty()){
+                erroraddPlayertext.setText("PLayer name cannot be empty.");
+                erroraddPlayertext.setTextFill(Color.RED);
             } else {
                 ArrayList<Double> pointsstats = new ArrayList<>();
                 ArrayList<Double> assistsstats = new ArrayList<>();
