@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,13 +16,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class addGameController implements Initializable {
+public class addGameController {
 
     public void initData(Team team, Player player) {
         this.team = team;
         this.player = player;
-//        teamLabel.setText("Team: " + team.getName());
-//        playerLabel.setText("Player: " + player.getName());
+        teamText.setText("Adding game for team " + team.getName());
+        playerText.setText("Player: " + player.getName());
     }
 
     private MainInterfaceController mainInterfaceController;
@@ -86,20 +87,19 @@ public class addGameController implements Initializable {
                 player.addGamecount(player.getGamecount());
 
                 player.addGamecount(player.getGamecount());
-                team.addPlayer(player);
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
+                Parent root = fxmlLoader.load();
+                MainInterfaceController controller = fxmlLoader.getController();
+                controller.setTeam(team);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
-
-
             } catch (NumberFormatException e) {
                 addGameErrortext.setText("Invalid input format.");
                 return;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        teamText.setText("Adding game for team " + team);
-        playerText.setText(player.getName());
     }
+
+
 }
