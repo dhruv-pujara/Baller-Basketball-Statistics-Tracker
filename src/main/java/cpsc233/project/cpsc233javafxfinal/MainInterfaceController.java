@@ -93,7 +93,7 @@ public class MainInterfaceController implements Initializable {
         private String fileName;
 
         @FXML
-        private ComboBox<Player> playerSelect;
+        private ComboBox<String> playerSelect;
 
         @FXML
         private TextField teamName;
@@ -133,7 +133,18 @@ public class MainInterfaceController implements Initializable {
                                 }
                         }
                         if (value == 0) {
-                                descriptionText.setText(Evaluations.TopPlayerStat(teams, Stats.getValue()));
+                                if(teamSelect.getValue() == null){
+                                        ErrorText.setText("There is no stat selected: Please select a stat");
+                                        ErrorText.setFill(Color.RED);
+                                }else {
+                                        String string = Evaluations.TopPlayerStat(teams, Stats.getValue());
+                                        if (string.isEmpty()) {
+                                                ErrorText.setText("There are no players currently made");
+                                                ErrorText.setFill(Color.RED);
+                                        } else {
+                                                descriptionText.setText(Evaluations.TopPlayerStat(teams, Stats.getValue()));
+                                        }
+                                }
                         }else{
                                 ErrorText.setText("There are no players currently made");
                                 ErrorText.setFill(Color.RED);
@@ -226,25 +237,25 @@ public class MainInterfaceController implements Initializable {
 
         @FXML
         void lastgameStats(MouseEvent event) {
-                Player player = playerSelect.getValue();
-                descriptionText.setText(Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
-        }
-
-        @FXML
-        void viewPortfolio(ActionEvent event) {
-                playerSelect.getItems().clear();
-                for (Team teamstoadd : teams) {
-                        if (teamstoadd.equals(teamSelect.getValue())) {
-                                ArrayList<Player> players = teamstoadd.getPlayers();
-                                for (Player playerstoadd : players) {
-                                        if (playerstoadd.equals(playerSelect.getValue())) {
-                                                descriptionText.setText(playerstoadd.toString());
-                                        }
-                                }
+                Team team = teamSelect.getValue();
+                for(Player players: team.getPlayers()){
+                        if(players.getName().equals(playerSelect.getValue())){
+                                Player player = players;
+                                descriptionText.setText(Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
                         }
                 }
         }
 
+        @FXML
+        void viewPortfolio(ActionEvent event) {
+                Team teamstoadd = teamSelect.getValue();
+                ArrayList<Player> players = teamstoadd.getPlayers();
+                for (Player playerstoadd : players) {
+                        if (playerstoadd.getName().equals(playerSelect.getValue())) {
+                                descriptionText.setText(playerstoadd.toString());
+                        }
+                }
+        }
         public void load (ActionEvent e) {
                 //Prompts a text dialog and asks user for file name to load from
                 try {
@@ -327,7 +338,7 @@ public class MainInterfaceController implements Initializable {
                         if(teamstoadd.equals(teamSelect.getValue())){
                                 ArrayList<Player> players = teamstoadd.getPlayers();
                                 for(Player playerstoadd: players){
-                                        playerSelect.getItems().add(playerstoadd);
+                                        playerSelect.getItems().add(playerstoadd.getName());
                                 }
                         }
                 }

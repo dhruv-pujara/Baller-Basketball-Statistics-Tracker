@@ -62,7 +62,7 @@ public class Stats {
      */
     public Double getMean(int gamesplayed, int priorgamecount) {
         Double summation = 0.0;
-        Integer divisor = gamesplayed - priorgamecount;
+        Integer divisor = gamesplayed - priorgamecount + 1;
         for (Double values : getStats()) {
             summation = summation + values;
         }
@@ -93,7 +93,6 @@ public class Stats {
         }
     }
     public Double lastGamestats(int gamesplayed, int gamesloaded){
-        Double lastgame = getStats().get(gamesplayed - gamesloaded - 1);
-        return lastgame;
+        return getStats().getLast();
     }
 }

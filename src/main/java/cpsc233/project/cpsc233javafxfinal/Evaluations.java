@@ -205,7 +205,7 @@ public class Evaluations{
                 DefStorage.add(0, maxdef);
                 String TopOff = TopPlayersOff.get(OffStorage.get(0));
                 String TopDef = TopPlayersDef.get(DefStorage.get(0));
-                eval = "Offensive All Star: " + TopOff + "\n" + "Defensive All Star" + TopDef;
+                eval = "Offensive All Star: " + TopOff + "\n" + "Defensive All Star: " + TopDef;
                 return eval;
             }
 return null;
@@ -243,7 +243,7 @@ return null;
         }
     }
         if (Statsstorage.isEmpty()) {
-            System.out.println("There is no player currently created");
+            return null;
         } else {
             Double maxoff = Collections.max(Statsstorage);
             Statsstorage.add(0, maxoff);
