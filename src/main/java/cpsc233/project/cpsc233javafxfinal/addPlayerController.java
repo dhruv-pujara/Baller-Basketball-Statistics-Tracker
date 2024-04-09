@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class addPlayerController implements Initializable {
     }
     public void initData(Team team) {
         this.team = team;
-        IntroText.setText("Adding a player to team " + team.getName() + ":");
+        IntroText.setText("Adding a player to Team " + team.getName() + ":");
         erroraddPlayertext.setTextFill(Color.BLACK);
     }
     @FXML
@@ -36,7 +37,7 @@ public class addPlayerController implements Initializable {
     @FXML
     private TextField playerNumber;
     @FXML
-    private Label IntroText;
+    private Text IntroText;
     @FXML
     private Label erroraddPlayertext;
     @FXML
