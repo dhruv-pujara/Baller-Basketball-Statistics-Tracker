@@ -45,6 +45,7 @@ public class MainInterfaceController implements Initializable {
                         for(Player players: team.getPlayers()) {
                                 playerSelect.getItems().add(players.getName());
                         }
+                        ErrorText.setText("Players successfully added to team " + team.getName());
                 }else{
                         ErrorText.setText("No team selected");
                         ErrorText.setTextFill(Color.RED);
@@ -67,6 +68,7 @@ public class MainInterfaceController implements Initializable {
                                 stage.setTitle("Baller: The Basketball Tracking Program v1.3");
                                 stage.setScene(scene);
                                 stage.showAndWait();
+                                ErrorText.setText("Game successfully added for team " + team.getName());
                                 if (team.getPlayers().size() == 1) {
                                         descriptionText.setText(players.toString());
                                 }else{
