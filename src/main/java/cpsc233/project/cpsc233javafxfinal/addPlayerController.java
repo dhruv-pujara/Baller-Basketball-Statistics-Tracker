@@ -34,14 +34,18 @@ public class addPlayerController implements Initializable {
     void addtoTeam(MouseEvent event) {
         try {
             System.out.println(team.toString());
-            ArrayList<Double> stats = new ArrayList<>();
+            ArrayList<Double> pointsstats = new ArrayList<>();
+            ArrayList<Double> assistsstats = new ArrayList<>();
+            ArrayList<Double> stealssstats = new ArrayList<>();
+            ArrayList<Double> blocksstats = new ArrayList<>();
+            ArrayList<Double> reboundsstats = new ArrayList<>();
             int gamecount = 0;
             int prior = 0;
-            Stats points = new Stats(stats, StatsType.POINTS);
-            Stats assists = new Stats(stats, StatsType.ASSISTS);
-            Stats steals = new Stats(stats, StatsType.STEALS);
-            Stats blocks = new Stats(stats, StatsType.BLOCKS);
-            Stats rebounds = new Stats(stats, StatsType.REBOUNDS);
+            Stats points = new Stats(pointsstats, StatsType.POINTS);
+            Stats assists = new Stats(assistsstats, StatsType.ASSISTS);
+            Stats steals = new Stats(stealssstats, StatsType.STEALS);
+            Stats blocks = new Stats(blocksstats, StatsType.BLOCKS);
+            Stats rebounds = new Stats(reboundsstats, StatsType.REBOUNDS);
             Player player = new Player(Integer.parseInt(playerNumber.getText()), playerName.getText(), positions.getValue(), points, assists, blocks, rebounds, steals, gamecount, prior);
             team.addPlayer(player);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));

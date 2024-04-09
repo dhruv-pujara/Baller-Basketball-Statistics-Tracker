@@ -62,12 +62,26 @@ public class Stats {
      */
     public Double getMean(int gamesplayed, int priorgamecount) {
         Double summation = 0.0;
-        Integer divisor = gamesplayed - priorgamecount + 1;
-        for (Double values : getStats()) {
-            summation = summation + values;
+        if(priorgamecount != 0) {
+            Integer divisor = gamesplayed - priorgamecount + 1;
+            for (Double values : getStats()) {
+                summation = summation + values;
+            }
+            Double mean = summation / divisor;
+            return mean;
+        }else {
+            if (gamesplayed != 0) {
+
+                Integer divisor = gamesplayed;
+                for (Double values : getStats()) {
+                    summation = summation + values;
+                }
+                Double mean = summation / divisor;
+                return mean;
+            } else {
+                return 0.0;
+            }
         }
-        Double mean = summation / divisor;
-        return mean;
     }
 
     /**

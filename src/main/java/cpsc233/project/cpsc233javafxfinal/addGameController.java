@@ -83,10 +83,8 @@ public class addGameController {
                 player.getSteals().setStats(player.getSteals().getStats(), stealsStored);
                 player.getBlocks().setStats(player.getBlocks().getStats(), blocksStored);
                 player.getRebounds().setStats(player.getRebounds().getStats(), reboundsStored);
-
                 player.addGamecount(player.getGamecount());
 
-                player.addGamecount(player.getGamecount());
                 FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Main.fxml"));
                 Parent root = fxmlLoader.load();
                 MainInterfaceController controller = fxmlLoader.getController();
