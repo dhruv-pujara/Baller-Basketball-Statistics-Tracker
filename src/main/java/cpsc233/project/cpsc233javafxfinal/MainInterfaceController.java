@@ -7,7 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -93,6 +96,7 @@ public class MainInterfaceController implements Initializable {
         public ArrayList<Team> teams = new ArrayList<>();
         public Team team;
         private String fileName;
+
 
 
         //FXML ID inserts
