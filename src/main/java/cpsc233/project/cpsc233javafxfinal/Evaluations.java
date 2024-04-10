@@ -163,8 +163,8 @@ public class Evaluations{
         "Assists: " + assists.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
         "Steals: "+ steals.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
         "Blocks: "+ blocks.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
-        "Rebounds: " + rebounds.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
-         "Evaluation: " + evaluation;
+        "Rebounds: " + rebounds.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" + "\n" +
+         "Evaluation: \n" + evaluation;
         return eval;
     }
 
@@ -205,7 +205,7 @@ public class Evaluations{
                 Player TopOff = TopPlayersOff.get(OffStorage.getLast());
                 Player TopDef = TopPlayersDef.get(DefStorage.getLast());
                 //JJ                                                            here                                                                                                                              here
-                eval = "Offensive All Star: " + TopOff.getName() + " with " + OffStorage.getLast() + " average between points and assists" + "\n" + "Defensive All Star: " + TopDef.getName() + " with " + DefStorage.getLast() + " average between steals, rebounds and blocks";
+                eval = "Offensive All Star: " + TopOff.getName() + " with " + OffStorage.getLast() + " average between points and assists" + "\n" + "\n" + "Defensive All Star: " + TopDef.getName() + " with " + DefStorage.getLast() + " average between steals, rebounds and blocks";
                 return eval;
             }
 }
@@ -247,7 +247,7 @@ public class Evaluations{
         } else {
             Collections.sort(Statsstorage);
             Player Topplayer = TopPlayersStats.get(Statsstorage.getLast());
-            top = "Best player in " + statsType + ": " + Topplayer.getName() + " with " + Statsstorage.getLast();
+            top = "Best player in " + statsType + ": \n" + Topplayer.getName() + " with " + Statsstorage.getLast();
         }
         return top;
 }

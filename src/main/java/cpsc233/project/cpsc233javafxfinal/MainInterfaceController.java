@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -74,11 +75,9 @@ public class MainInterfaceController implements Initializable {
                                 stage.showAndWait();
                                 ErrorText.setText("Game successfully added for team " + team.getName());
                                 ErrorText.setTextFill(Color.BLACK);
-                                if (team.getPlayers().size() == 1) {
-                                        descriptionText.setText(players.toString());
-                                }else{
-                                        descriptionText.setText("Select each player and get last" + "\n" +  "game to get their evaluation");
-                                }
+                                descriptionText.setText("Choose a player and press \"View Last Game\" to view player's evaluation");
+                                descriptionText.setFont(Font.font("DejaVu Sans", 20));
+
                         }
                         } else {
                                 ErrorText.setText("Cannot add a game. Please add players to the team first.");
@@ -156,8 +155,9 @@ public class MainInterfaceController implements Initializable {
                                                 ErrorText.setText("There are no players currently made");
                                                 ErrorText.setTextFill(Color.RED);
                                         } else {
-                                                ErrorText.setText("");
+                                                ErrorText.setText(null);
                                                 descriptionText.setText(string);
+                                                descriptionText.setFont(Font.font("DejaVu Sans", 20));
                                         }
                                 }
                         }else{
@@ -180,17 +180,18 @@ public class MainInterfaceController implements Initializable {
                         }
                         if (value == 0) {
                                 descriptionText.setText("The current all star team for Offense and Defense " +
-                                        "by position are:" + "\n" +
-                                        "Centre: " +
-                                        Evaluations.topOffTopDefForPosition(teams, Positions.Centre) + "\n" +
-                                        "Small Forward: " +
-                                        Evaluations.topOffTopDefForPosition(teams, Positions.SmallForward) + "\n" +
-                                        "Power Forward: " +
-                                        Evaluations.topOffTopDefForPosition(teams, Positions.PowerForward) + "\n" +
-                                        "Shooting Guard: " +
-                                        Evaluations.topOffTopDefForPosition(teams, Positions.ShootingGuard) + "\n" +
-                                        "Point Guard: " +
+                                        "by position are:" + "\n" + "\n" +
+                                        "Centre: \n" +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.Centre) + "\n" + "\n" +
+                                        "Small Forward: \n" +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.SmallForward) + "\n" +"\n" +
+                                        "Power Forward: \n" +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.PowerForward) + "\n" + "\n" +
+                                        "Shooting Guard: \n" +
+                                        Evaluations.topOffTopDefForPosition(teams, Positions.ShootingGuard) + "\n" + "\n" +
+                                        "Point Guard: \n" +
                                         Evaluations.topOffTopDefForPosition(teams, Positions.PointGuard));
+                                descriptionText.setFont(Font.font("DejaVu Sans", 20));
                         }else{
                                 ErrorText.setText("There are no players currently made");
                                 ErrorText.setTextFill(Color.RED);
@@ -239,7 +240,9 @@ public class MainInterfaceController implements Initializable {
                                         descriptionText.setText("This player has played no games!");
                                 } else {
                                         Player player = players;
-                                        descriptionText.setText(Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
+                                        descriptionText.setText(player.getName() + "'s last game:\n" + "\n" +
+                                                        Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
+                                        descriptionText.setFont(Font.font("DejaVu Sans", 20));
                                 }
                         }
 
@@ -253,6 +256,7 @@ public class MainInterfaceController implements Initializable {
                 for (Player playerstoadd : players) {
                         if (playerstoadd.getName().equals(playerSelect.getValue())) {
                                 descriptionText.setText(playerstoadd.toString());
+                                descriptionText.setFont(Font.font("DejaVu Sans", 20));
                         }
                 }
         }
