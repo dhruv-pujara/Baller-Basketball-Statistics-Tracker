@@ -69,7 +69,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <SplitPane focusTraversable="true" prefHeight="401.0" prefWidth="903.0" VBox.vgrow="ALWAYS">
+      <SplitPane focusTraversable="true" prefHeight="413.0" prefWidth="903.0" VBox.vgrow="ALWAYS">
          <items>
             <AnchorPane prefHeight="566.0" prefWidth="902.0">
                <children>
@@ -132,9 +132,9 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #A9AAAF;" VBox.vgrow="NEVER">
+      <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #A9AAAF;" VBox.vgrow="ALWAYS">
          <children>
-            <Pane prefHeight="21.0" prefWidth="897.0" HBox.hgrow="ALWAYS">
+            <Pane prefHeight="21.0" prefWidth="897.0">
                <children>
                   <Label fx:id="ErrorText" layoutX="7.0" layoutY="-2.0" prefHeight="26.0" prefWidth="882.0">
                      <font>

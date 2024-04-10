@@ -347,7 +347,9 @@ public class MainInterfaceController implements Initializable {
                     UCID: 30142712, 30062571, 30210700
                     Tutorial: T13
                     TA: Shanna Hollingworth
-                    Program Version: v1.3""");
+                    Program Version: v1.3
+                    
+                    Basketball.GIF Source: https://tinyurl.com/mry9xy9y""");
                 about.show();
         }
         //I would add the UnaccountedException file here, but all of them in this area have been covered by other means!
