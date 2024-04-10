@@ -122,8 +122,7 @@ public class addGameController {
                   In this menu, you can add a game to a team. You will be prompted to add several stats:
                   Points, Assists, Blocks, Steals, and Rebounds
                   
-                  You will add these for each member of the team. You will automatically return to the main menu when
-                  you have added stats for each teammate.
+                  You will automatically return to the main menu when you have added stats for each teammate.
                   """);
         about.show();
     }
