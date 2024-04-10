@@ -197,7 +197,8 @@ public class Evaluations{
             }
         }
             if (OffStorage.isEmpty()) {
-                System.out.println("There is no player with this position currently");
+                eval = "There is no player with this position currently";
+                return eval;
             } else {
                 Collections.sort(OffStorage);
                 Collections.sort(DefStorage);
@@ -207,7 +208,6 @@ public class Evaluations{
                 eval = "Offensive All Star: " + TopOff.getName() + " with " + OffStorage.getLast() + " average between points and assists" + "\n" + "Defensive All Star: " + TopDef.getName() + " with " + DefStorage.getLast() + " average between steals, rebounds and blocks";
                 return eval;
             }
-return null;
 }
 
     /**

@@ -65,45 +65,54 @@ public class addPlayerController implements Initializable {
      */
     @FXML
     void addtoTeam(MouseEvent event) {
+        int value = 1;
         try {
-            if (positions.getValue() == null) {
-                erroraddPlayertext.setText("Position not selected.");
-                erroraddPlayertext.setTextFill(Color.RED);
-            } else if(playerName.getText().trim().isEmpty()){
-                erroraddPlayertext.setText("PLayer name cannot be empty.");
-                erroraddPlayertext.setTextFill(Color.RED);
-            } else {
-                // Creating player object with provided details
-                ArrayList<Double> pointsstats = new ArrayList<>();
-                ArrayList<Double> assistsstats = new ArrayList<>();
-                ArrayList<Double> stealssstats = new ArrayList<>();
-                ArrayList<Double> blocksstats = new ArrayList<>();
-                ArrayList<Double> reboundsstats = new ArrayList<>();
-                int gamecount = 0;
-                int prior = 0;
-                Stats points = new Stats(pointsstats, StatsType.POINTS);
-                Stats assists = new Stats(assistsstats, StatsType.ASSISTS);
-                Stats steals = new Stats(stealssstats, StatsType.STEALS);
-                Stats blocks = new Stats(blocksstats, StatsType.BLOCKS);
-                Stats rebounds = new Stats(reboundsstats, StatsType.REBOUNDS);
-                Player player = new Player(Integer.parseInt(playerNumber.getText()), playerName.getText(), positions.getValue(), points, assists, blocks, rebounds, steals, gamecount, prior);
-                // Adding player to the team
-                team.addPlayer(player);
-                erroraddPlayertext.setText("Player " + playerName.getText() +" has been added!");
-                erroraddPlayertext.setTextFill(Color.BLACK);
-                // Clearing text fields and ComboBox
-                playerName.setText(null);
-                playerNumber.setText(null);
-                positions.setValue(null);
+            for (Player players : team.getPlayers()) {
+                if (players.getJersey() == Integer.parseInt(playerNumber.getText())) {
+                    value = 0;
+                }
             }
-        } catch (NumberFormatException e) {
-            erroraddPlayertext.setText("Invalid Input - Please input number");
-            erroraddPlayertext.setTextFill(Color.RED);
+                if (positions.getValue() == null) {
+                    erroraddPlayertext.setText("Position not selected.");
+                    erroraddPlayertext.setTextFill(Color.RED);
+                } else if (playerName.getText().trim().isEmpty()) {
+                    erroraddPlayertext.setText("Player name cannot be empty.");
+                    erroraddPlayertext.setTextFill(Color.RED);
+                } else if (value == 0) {
+                    erroraddPlayertext.setText("Player has same number as another player on team");
+                    erroraddPlayertext.setTextFill(Color.RED);
+                } else {
+                    // Creating player object with provided details
+                    ArrayList<Double> pointsstats = new ArrayList<>();
+                    ArrayList<Double> assistsstats = new ArrayList<>();
+                    ArrayList<Double> stealssstats = new ArrayList<>();
+                    ArrayList<Double> blocksstats = new ArrayList<>();
+                    ArrayList<Double> reboundsstats = new ArrayList<>();
+                    int gamecount = 0;
+                    int prior = 0;
+                    Stats points = new Stats(pointsstats, StatsType.POINTS);
+                    Stats assists = new Stats(assistsstats, StatsType.ASSISTS);
+                    Stats steals = new Stats(stealssstats, StatsType.STEALS);
+                    Stats blocks = new Stats(blocksstats, StatsType.BLOCKS);
+                    Stats rebounds = new Stats(reboundsstats, StatsType.REBOUNDS);
+                    Player player = new Player(Integer.parseInt(playerNumber.getText()), playerName.getText(), positions.getValue(), points, assists, blocks, rebounds, steals, gamecount, prior);
+                    // Adding player to the team
+                    team.addPlayer(player);
+                    erroraddPlayertext.setText("Player " + playerName.getText() + " has been added!");
+                    erroraddPlayertext.setTextFill(Color.BLACK);
+                    // Clearing text fields and ComboBox
+                    playerName.setText(null);
+                    playerNumber.setText(null);
+                    positions.setValue(null);
+                }
+            } catch(NumberFormatException e){
+                erroraddPlayertext.setText("Invalid Input - Please input number");
+                erroraddPlayertext.setTextFill(Color.RED);
 
-        } catch (Exception e) {
-             unaccountedError(e);
+            } catch(Exception e){
+                unaccountedError(e);
+            }
         }
-    }
 
 
     /**

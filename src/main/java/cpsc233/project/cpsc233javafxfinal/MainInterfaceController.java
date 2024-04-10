@@ -77,7 +77,7 @@ public class MainInterfaceController implements Initializable {
                                 if (team.getPlayers().size() == 1) {
                                         descriptionText.setText(players.toString());
                                 }else{
-                                        descriptionText.setText("Select each player and get last game to get their evaluation");
+                                        descriptionText.setText("Select each player and get last" + "\n" +  "game to get their evaluation");
                                 }
                         }
                         } else {
