@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,7 +16,10 @@
    <children>
       <MenuBar style="-fx-background-color: #A9AAAF;">
         <menus>
-          <Menu mnemonicParsing="false" onAction="#addGameHelp" style="-fx-font-family: dejavu Sans; -fx-font-weight: bold;" text="Help" />
+          <Menu mnemonicParsing="false" style="-fx-font-family: dejavu Sans; -fx-font-weight: bold;" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#addGameHelp" text="How to add a Game" />
+               </items></Menu>
         </menus>
       </MenuBar>
       <AnchorPane prefHeight="286.0" prefWidth="342.0">
