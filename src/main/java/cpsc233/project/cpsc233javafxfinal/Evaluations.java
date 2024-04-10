@@ -205,7 +205,7 @@ public class Evaluations{
                 Player TopOff = TopPlayersOff.get(OffStorage.getLast());
                 Player TopDef = TopPlayersDef.get(DefStorage.getLast());
                 //JJ                                                            here                                                                                                                              here
-                eval = "Offensive All Star: " + TopOff.getName() + " with " + OffStorage.getLast() + " average between points and assists" + "\n" + "\n" + "Defensive All Star: " + TopDef.getName() + " with " + DefStorage.getLast() + " average between steals, rebounds and blocks";
+                eval = "Offensive All Star: " + TopOff.getName() + " with a " + Math.round(OffStorage.getLast() * 100) / 100.0 + " average between points and assists" + "\n" + "\n" + "Defensive All Star: " + TopDef.getName() + " with a " + Math.round(DefStorage.getLast() * 100)/100.0 + " average between steals, rebounds and blocks";
                 return eval;
             }
 }
