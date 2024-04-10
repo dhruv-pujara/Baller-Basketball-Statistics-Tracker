@@ -32,13 +32,21 @@ public class MainInterfaceController implements Initializable {
                 Stats.getItems().addAll(StatsType.POINTS, StatsType.ASSISTS, StatsType.BLOCKS, StatsType.REBOUNDS, StatsType.STEALS);
         }
 
-        //switches to AddPlayer scene to add players
+        /**
+         * switches to AddPlayer scene to add players
+         * @param e Action event for when the "Add Player" button is clicked
+         * @throws IOException If there is an error loading the FXML file.
+         */
         public void switchToAddPlayer(ActionEvent e) throws IOException {
+                // Get the selected team from the dropdown
                 Team team = teamSelect.getValue();
+                // Check if a team is selected
                 if (team != null) {
+                        // Load the FXML file for adding a player
                         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddPlayer.fxml"));
                         Parent root = fxmlLoader.load();
                         addPlayerController controller = fxmlLoader.getController();
+                        // Initialize data for the controller (pass the selected team)
                         controller.initData(team);
                         Stage stage = new Stage();
                         scene = new Scene(root);
@@ -52,21 +60,30 @@ public class MainInterfaceController implements Initializable {
                         ErrorText.setText("Players successfully added to team " + team.getName());
                         ErrorText.setTextFill(Color.BLACK);
                 }else{
+                        // Display error message if no team is selected
                         ErrorText.setText("No team selected");
                         ErrorText.setTextFill(Color.RED);
                 }
         }
 
-        //Switches to addGame scene to add game
+        /**
+         * Switches to addGame scene to add game
+         * @param e Action event for when the "Add Player" button is clicked
+         * @throws IOException IOException If there is an error loading the FXML file.
+         */
         @FXML
         public void switchToAddGame(ActionEvent e) throws IOException {
+                // Get the selected team from the dropdown
                 Team team = teamSelect.getValue();
+                // Check if a team is selected
                 if (team != null) {
+                        // Check if the team has players
                         if(!team.getPlayers().isEmpty()){
                         for (Player players : team.getPlayers()) {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddGame.fxml"));
                                 Parent root = fxmlLoader.load();
                                 addGameController controller = fxmlLoader.getController();
+                                // Initialize data for the controller (pass the selected team and player)
                                 controller.initData(team, players);
                                 Stage stage = new Stage();
                                 Scene scene = new Scene(root);
@@ -75,15 +92,18 @@ public class MainInterfaceController implements Initializable {
                                 stage.showAndWait();
                                 ErrorText.setText("Game successfully added for team " + team.getName());
                                 ErrorText.setTextFill(Color.BLACK);
+                                // Update description text
                                 descriptionText.setText("Choose a player and press \"View Last Game\" to view player's evaluation");
                                 descriptionText.setFont(Font.font("DejaVu Sans", 20));
 
                         }
+                                // Display error message if no players in the team
                         } else {
                                 ErrorText.setText("Cannot add a game. Please add players to the team first.");
                                 ErrorText.setTextFill(Color.RED);
                         }
                 } else {
+                        // Display error message if no team is selected
                         ErrorText.setText("Please select a team before adding a game.");
                         ErrorText.setTextFill(Color.RED);
 
@@ -121,25 +141,35 @@ public class MainInterfaceController implements Initializable {
         private ComboBox<Team> teamSelect;
 
 
-
-
-        //Sets team
+        /**
+         * Sets team
+         * @param team The team that has to be set
+         */
         public void setTeam(Team team) {
                 this.team = team;
+                // Iterate through the list of teams to update the team
                 for(Team teamstoiterate: teams){
                         if(teamstoiterate.getName().equals(team.getName())){
                                 teams.remove(teamstoiterate);
+                                // Add the new team to the list
                                 teams.add(team);
                         }
                 }
         }
+
+        /**
+         * Handles the event when the "Best in Stat" button is clicked to display the top player statistic.
+         * @param event The MouseEvent generated by clicking the "Best in Stat" button.
+         */
         @FXML
         void statBest(MouseEvent event) {
                 int value = 1;
+                // Check if there are no teams currently created
                 if (teams.isEmpty()) {
                         ErrorText.setText("There are no teams currently created.");
                         ErrorText.setTextFill(Color.RED);
                 } else {
+                        // Iterate through the teams to check if any team has players
                         for (Team teamstoiterate : teams) {
                                 if (!teamstoiterate.getPlayers().isEmpty()) {
                                         value = 0;
@@ -150,6 +180,7 @@ public class MainInterfaceController implements Initializable {
                                         ErrorText.setText("There is no stat selected: Please select a stat");
                                         ErrorText.setTextFill(Color.RED);
                                 }else {
+                                        // Retrieve the top player statistic based on the selected stat
                                         String string = Evaluations.TopPlayerStat(teams, Stats.getValue());
                                         if (string.isEmpty()) {
                                                 ErrorText.setText("There are no players currently made");
@@ -161,24 +192,33 @@ public class MainInterfaceController implements Initializable {
                                         }
                                 }
                         }else{
+                                // Display an error message if there are no players currently made
                                 ErrorText.setText("There are no players currently made");
                                 ErrorText.setTextFill(Color.RED);
                         }
                 }
         }
+
+        /**
+         * Handles the event when the "All Star" button is clicked to display the top players for offense and defense.
+         * @param event The MouseEvent generated by clicking the "All Star" button.
+         */
         @FXML
         void allStar(MouseEvent event) {
                 int value = 1;
+                // Check if there are no teams currently created
                 if (teams.isEmpty()){
                         ErrorText.setText("There are no teams currently created.");
                         ErrorText.setTextFill(Color.RED);
                 }else {
+                        // Iterate through the teams to check if any team has players
                         for (Team teamstoiterate : teams) {
                                 if (!teamstoiterate.getPlayers().isEmpty()) {
                                         value = 0;
                                 }
                         }
                         if (value == 0) {
+                                // Display the top players for offense and defense by position
                                 descriptionText.setText("The current all star team for Offense and Defense " +
                                         "by position are:" + "\n" + "\n" +
                                         "Centre: \n" +
@@ -193,26 +233,37 @@ public class MainInterfaceController implements Initializable {
                                         Evaluations.topOffTopDefForPosition(teams, Positions.PointGuard));
                                 descriptionText.setFont(Font.font("DejaVu Sans", 20));
                         }else{
+                                // Display an error message if there are no players currently made
                                 ErrorText.setText("There are no players currently made");
                                 ErrorText.setTextFill(Color.RED);
                         }
                 }
         }
 
+        /**
+         * Sets data for the team selection dropdown.
+         */
         public void setData4team(){
                 teamSelect.getItems().clear();
+                // Iterate through the list of teams to add them to the dropdown
                 for(Team teamstoadd: teams){
                         teamSelect.getItems().add(teamstoadd);
                 }
         }
 
+        /**
+         * Handles the event when the "Add Team" button is clicked to add a new team.
+         * @param event The MouseEvent generated by clicking the "Add Team" button.
+         */
         @FXML
         void addTeam(MouseEvent event) {
                 ErrorText.setText("Welcome to Baller!");
+                // Check if the team name field is empty
                 if (teamName.getText().isEmpty()) {
                         ErrorText.setText("Error: No team name given");
                         ErrorText.setTextFill(Color.RED);
                 } else {
+                        // Check if a team with the same name already exists
                         for (Team teamnames : teams) {
                                 if (teamnames.getName().equals(teamName.getText())) {
                                         ErrorText.setText("Invalid team, team with this name already exists.");
@@ -220,26 +271,35 @@ public class MainInterfaceController implements Initializable {
                                 }
                         }
                         if (!ErrorText.getText().equals("Invalid team, team with this name already exists.")) {
+                                // Create a new team with an empty list of players and the provided team name
                                 ArrayList<Player> players = new ArrayList<>();
                                 Team team = new Team(players, teamName.getText());
                                 ErrorText.setText("Team " + team.getName() + " has been added!");
                                 ErrorText.setTextFill(Color.BLACK);
                                 teamName.clear();
                                 teams.add(team);
+                                // Update the data for the team selection dropdown
                                 setData4team();
                         }
                 }
         }
 
+        /**
+         * Handles the event when the "View Last Game" button is clicked to display the last game stats of a player.
+         * @param event The MouseEvent generated by clicking the "View Last Game" button.
+         */
         @FXML
         void lastgameStats(MouseEvent event) {
+                // Get the selected team from the dropdown
                 Team team = teamSelect.getValue();
+                // Iterate through the players in the selected team
                 for(Player players: team.getPlayers()){
                         if(players.getName().equals(playerSelect.getValue())) {
                                 if (players.getGamecount() < 1) {
                                         descriptionText.setText("This player has played no games!");
                                 } else {
                                         Player player = players;
+                                        // Display the player's last game stats
                                         descriptionText.setText(player.getName() + "'s last game:\n" + "\n" +
                                                         Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
                                         descriptionText.setFont(Font.font("DejaVu Sans", 20));
@@ -249,6 +309,10 @@ public class MainInterfaceController implements Initializable {
                 }
         }
 
+        /**
+         *
+         * @param event
+         */
         @FXML
         void viewPortfolio(ActionEvent event) {
                 Team teamstoadd = teamSelect.getValue();
@@ -260,6 +324,11 @@ public class MainInterfaceController implements Initializable {
                         }
                 }
         }
+
+        /**
+         *
+         * @param event
+         */
         @FXML
         void playerChange(ActionEvent event) {
                 playerSelect.getItems().clear();
