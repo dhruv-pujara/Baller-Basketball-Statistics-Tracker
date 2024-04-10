@@ -108,6 +108,25 @@ public class addGameController {
             }
     }
 
+    /** Helps user is they do not know what to do during AddGame
+     *
+     * @param e
+     */
+    public void addGameHelp (ActionEvent e){
+        Alert about = new Alert(Alert.AlertType.INFORMATION);
+        about.setTitle("Add Game Help");
+        about.setHeaderText("""
+                How to add a game:
+                """);
+        about.setContentText("""
+                  In this menu, you can add a game to a team. You will be prompted to add several stats:
+                  Points, Assists, Blocks, Steals, and Rebounds
+                  
+                  You will add these for each member of the team. You will automatically return to the main menu when
+                  you have added stats for each teammate.
+                  """);
+        about.show();
+    }
     /**
      * Handles unaccounted errors.
      * @param e The Exception object representing the error.
@@ -124,5 +143,6 @@ public class addGameController {
         leave.close();
         System.exit(1);
     }
+
 
 }

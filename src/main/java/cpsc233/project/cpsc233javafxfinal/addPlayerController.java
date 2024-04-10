@@ -113,8 +113,24 @@ public class addPlayerController implements Initializable {
                 unaccountedError(e);
             }
         }
-
-
+    /** Helps user is they do not know what to do during addPlayer
+     *
+     * @param e
+     */
+    public void addPlayerHelp (ActionEvent e){
+        Alert about = new Alert(Alert.AlertType.INFORMATION);
+        about.setTitle("Add Player Help");
+        about.setHeaderText("""
+                How to add a Player:
+                """);
+        about.setContentText("""
+                  In this menu, you can add a player to a team. You will be prompted to add several details:
+                  The players name, thier jersey number, and thier position.
+                  
+                  Once you add the desired amount of players, select the "Main Menu" button to go back to the main menu.
+                  """);
+        about.show();
+    }
     /**
      * Handles unaccounted errors.
      * @param e he Exception object representing the error.
