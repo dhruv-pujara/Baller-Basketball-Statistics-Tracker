@@ -17,9 +17,9 @@ public class Evaluations{
      * @return mean from previous games
      * only for offensive team for allstar
      */
-    private static Double meansfoeval(Stats stats1, Stats stats2, int gamesplayed,int priorgamecount) {
-        Double statsfor1 = stats1.getMean(gamesplayed, priorgamecount);
-        Double statsfor2 = stats2.getMean(gamesplayed,priorgamecount);
+    private static Double meansfoeval(Stats stats1, Stats stats2, int gamesplayed) {
+        Double statsfor1 = stats1.getMean(gamesplayed);
+        Double statsfor2 = stats2.getMean(gamesplayed);
         Double mean = (statsfor1 + statsfor2) / 2;
         return mean;
     }
@@ -33,10 +33,10 @@ public class Evaluations{
      * @return mean from previous games in specified stat
      * only used in allstar roster
      */
-    private static Double meansforeval(Stats stats1, Stats stats2, Stats stats3, int gamesplayed, int priorgamecount) {
-        Double statsfor1 = stats1.getMean(gamesplayed, priorgamecount);
-        Double statsfor2 = stats2.getMean(gamesplayed, priorgamecount);
-        Double statsfor3 = stats3.getMean(gamesplayed, priorgamecount);
+    private static Double meansforeval(Stats stats1, Stats stats2, Stats stats3, int gamesplayed) {
+        Double statsfor1 = stats1.getMean(gamesplayed);
+        Double statsfor2 = stats2.getMean(gamesplayed);
+        Double statsfor3 = stats3.getMean(gamesplayed);
         Double mean = (statsfor1 + statsfor2 + statsfor3) / 3;
         return mean;
     }
@@ -47,16 +47,16 @@ public class Evaluations{
      * @param gamesplayed How many games played by player
      * @return evaluation of last game's performance
      */
-    private static double evaluationsOfStats(Stats stats, int gamesplayed, int priorgamecount) {// Evaluates performance of player based on standard deviation
+    private static double evaluationsOfStats(Stats stats, int gamesplayed) {// Evaluates performance of player based on standard deviation
         Integer evaluation = 0;
         Integer lastvalueposition = lastgameIndex(stats);
         Double lastvalue = stats.getStats().get(lastvalueposition);
 
-        Double SDComparison = stats.getStandardDev(gamesplayed, priorgamecount);
+        Double SDComparison = stats.getStandardDev(gamesplayed);
         if (SDComparison == 0) {
             return evaluation;
         }
-        Double mean = stats.getMean(gamesplayed, priorgamecount);
+        Double mean = stats.getMean(gamesplayed);
         Double SDpositive = mean + SDComparison;
         Double SDnegative = mean - SDComparison;
         if (SDnegative < lastvalue && lastvalue < SDpositive) {
@@ -150,20 +150,20 @@ public class Evaluations{
      * @param rebounds Takes Stats type "rebounds" from player
      * @param gamesplayed Takes int gamePlayed from player
      */
-    public static String fullPrintedEvaluationAndLastGameStats(Stats points, Stats assists, Stats steals, Stats blocks, Stats rebounds, int gamesplayed, int priorgamecount){
+    public static String fullPrintedEvaluationAndLastGameStats(Stats points, Stats assists, Stats steals, Stats blocks, Stats rebounds, int gamesplayed){
         //Printed evaluation of last game
         String eval;
-        Double pointseval = evaluationsOfStats(points, gamesplayed, priorgamecount);
-        Double assistseval = evaluationsOfStats(assists, gamesplayed, priorgamecount);
-        Double stealsseval = evaluationsOfStats(steals, gamesplayed, priorgamecount);
-        Double blockseval = evaluationsOfStats(blocks, gamesplayed, priorgamecount);
-        Double reboundseval = evaluationsOfStats(rebounds, gamesplayed, priorgamecount);
+        Double pointseval = evaluationsOfStats(points, gamesplayed);
+        Double assistseval = evaluationsOfStats(assists, gamesplayed);
+        Double stealsseval = evaluationsOfStats(steals, gamesplayed);
+        Double blockseval = evaluationsOfStats(blocks, gamesplayed);
+        Double reboundseval = evaluationsOfStats(rebounds, gamesplayed);
         String evaluation = strevaluation(pointseval, assistseval,  stealsseval, blockseval, reboundseval, gamesplayed);
-        eval = "Points: " + points.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
-        "Assists: " + assists.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
-        "Steals: "+ steals.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
-        "Blocks: "+ blocks.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" +
-        "Rebounds: " + rebounds.lastGamestats(gamesplayed, priorgamecount) + " " + "\n" + "\n" +
+        eval = "Points: " + points.lastGamestats(gamesplayed) + " " + "\n" +
+        "Assists: " + assists.lastGamestats(gamesplayed) + " " + "\n" +
+        "Steals: "+ steals.lastGamestats(gamesplayed) + " " + "\n" +
+        "Blocks: "+ blocks.lastGamestats(gamesplayed) + " " + "\n" +
+        "Rebounds: " + rebounds.lastGamestats(gamesplayed) + " " + "\n" + "\n" +
          "Evaluation: \n" + evaluation;
         return eval;
     }
@@ -187,8 +187,8 @@ public class Evaluations{
                     Stats steals = players.getSteals();
                     Stats blocks = players.getBlocks();
                     Stats rebounds = players.getRebounds();
-                    Double meanoff = meansfoeval(points, assists, players.getGamecount(), players.getPriotgamecount());
-                    Double meandef = meansforeval(rebounds, steals, blocks, players.getGamecount(), players.getPriotgamecount());
+                    Double meanoff = meansfoeval(points, assists, players.getGamecount());
+                    Double meandef = meansforeval(rebounds, steals, blocks, players.getGamecount());
                     TopPlayersOff.put(meanoff, players);
                     TopPlayersDef.put(meandef, players);
                     OffStorage.add(meanoff);
@@ -234,7 +234,7 @@ public class Evaluations{
             statsforcomparison.add(rebounds);
             for (Stats statsfound : statsforcomparison) {
                 if (statsfound.getType() == statsType) {
-                    Double mean = statsfound.getMean(players.getGamecount(), players.getPriotgamecount());
+                    Double mean = statsfound.getMean(players.getGamecount());
                     TopPlayersStats.put(mean, players);
                     Statsstorage.add(mean);
 

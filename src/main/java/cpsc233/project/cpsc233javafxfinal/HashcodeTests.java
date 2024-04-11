@@ -45,11 +45,11 @@ public class HashcodeTests {
 
         //Add the player stats to an array list
         ArrayList<Player> players = new ArrayList<Player>();
-        players.add(new Player(4, "Jackson", Positions.Centre, points1, assists1, blocks1, rebounds1, steals1, 2,1));
-        players.add(new Player(8, "Billy", Positions.SmallForward, points2, assists2, blocks2, rebounds2, steals2, 4,2));
-        players.add(new Player(2, "AJ", Positions.ShootingGuard, points3, assists3, blocks3, rebounds3, steals3, 7,2));
-        players.add(new Player(12, "Shelly", Positions.PowerForward, points4, assists4, blocks4, rebounds4, steals4, 2,0));
-        players.add(new Player(19, "Jordan", Positions.PointGuard, points5, assists5, blocks5, rebounds5, steals5, 6,4));
+        players.add(new Player(4, "Jackson", Positions.Centre, points1, assists1, blocks1, rebounds1, steals1, 2));
+        players.add(new Player(8, "Billy", Positions.SmallForward, points2, assists2, blocks2, rebounds2, steals2, 4));
+        players.add(new Player(2, "AJ", Positions.ShootingGuard, points3, assists3, blocks3, rebounds3, steals3, 7));
+        players.add(new Player(12, "Shelly", Positions.PowerForward, points4, assists4, blocks4, rebounds4, steals4, 2));
+        players.add(new Player(19, "Jordan", Positions.PointGuard, points5, assists5, blocks5, rebounds5, steals5, 6));
 
         System.out.println("INITIAL LIST:");
         for (Player player : players) {
@@ -59,7 +59,7 @@ public class HashcodeTests {
         System.out.println();
         System.out.println();
         System.out.println();
-        players.remove(new Player(12, "Shelly", Positions.PowerForward, points4, assists4, blocks4, rebounds4, steals4, 2, 0));
+        players.remove(new Player(12, "Shelly", Positions.PowerForward, points4, assists4, blocks4, rebounds4, steals4, 2));
         System.out.println("UPDATED LIST:");
         for (Player player : players) {
             System.out.println(player.toString());

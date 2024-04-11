@@ -29,10 +29,10 @@ public class Player {
      * @param blocks StatsType blocks -  how many blocks a player has
      * @param rebounds StatsType rebounds - how many rebounds a player has
      * @param steals StatsType steals - how many steals a player has
-     * @param gamecount int gamecount - how many games a player has been in
+     *
      */
     // Constructor
-    public Player(int jersey, String name, Positions position, Stats points, Stats assists, Stats blocks, Stats rebounds, Stats steals, int gamecount, int priorgamecount) {
+    public Player(int jersey, String name, Positions position, Stats points, Stats assists, Stats blocks, Stats rebounds, Stats steals, int gamecount) {
         this.jersey = jersey;
         this.name = name;
         this.position = position;
@@ -42,7 +42,6 @@ public class Player {
         this.rebounds = rebounds;
         this.blocks = blocks;
         this.gamecount = gamecount;
-        this.priotgamecount = priorgamecount;
     }
 
 //    public Player(int jersey, String jackson, String centre, int i, int i1, int i2, int i3, int i4, int gamecount) {
@@ -227,9 +226,9 @@ public class Player {
     @Override
     public String toString(){
         String output = String.format(getName() + "'s player profile:\n" + "Jersey Number: " + getJersey() + "\n" +
-                "Position: " + getPosition() + "\n" + "Games Played: " + getGamecount() + "\n" + "Average Points: " + getPoints().getMean(getGamecount(), getPriotgamecount()) + "\n"
-                 + "Average Assists: " + getAssists().getMean(getGamecount(), getPriotgamecount()) + "\n" + "Average Steals: " + getSteals().getMean(getGamecount(), getPriotgamecount()) + "\n" +
-                "Average Blocks: " + getBlocks().getMean(getGamecount(), getPriotgamecount()) + "\n" + "Average Rebounds: " + getRebounds().getMean(getGamecount(), getPriotgamecount()));
+                "Position: " + getPosition() + "\n" + "Games Played: " + getGamecount() + "\n" + "Average Points: " + getPoints().getMean(getGamecount()) + "\n"
+                 + "Average Assists: " + getAssists().getMean(getGamecount()) + "\n" + "Average Steals: " + getSteals().getMean(getGamecount()) + "\n" +
+                "Average Blocks: " + getBlocks().getMean(getGamecount()) + "\n" + "Average Rebounds: " + getRebounds().getMean(getGamecount()));
         return output;
     }
 
@@ -244,10 +243,6 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects.hash(player, jersey, name, position, points, assists, rebounds, blocks, steals, gamecount);
-    }
-
-    public int getPriotgamecount() {
-        return priotgamecount;
     }
 
 }

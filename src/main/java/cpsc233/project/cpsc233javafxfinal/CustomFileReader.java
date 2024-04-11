@@ -23,10 +23,37 @@ public class CustomFileReader extends Reader {
         ArrayList<String[]> values = new ArrayList<String[]>();
         for (Team teamlist : teams) {
             for (Player players : teamlist.getPlayers()) {
+                ArrayList<Double> points = players.getPoints().getStats();
+                ArrayList<Double> assists = players.getAssists().getStats();
+                ArrayList<Double> steals = players.getSteals().getStats();
+                ArrayList<Double> blocks = players.getBlocks().getStats();
+                ArrayList<Double> rebounds = players.getRebounds().getStats();
+                ArrayList<String> pointsstring = new ArrayList<>();
+                ArrayList<String> assistsstring = new ArrayList<>();
+                ArrayList<String> stealsstring = new ArrayList<>();
+                ArrayList<String> blocksstring = new ArrayList<>();
+                ArrayList<String> reboundsstring = new ArrayList<>();
+
+                for(Double gamepoints: points){
+                    pointsstring.add(Double.toString(gamepoints));
+                }for(Double gameassists: assists){
+                    assistsstring.add(Double.toString(gameassists));
+                }
+                for(Double gamesteals: steals){
+                    stealsstring.add(Double.toString(gamesteals));
+                }for(Double gameblocks: blocks){
+                    blocksstring.add(Double.toString(gameblocks));
+                }for(Double gamerebounds: rebounds){
+                    reboundsstring.add(Double.toString(gamerebounds));
+                }
+                String pointstoadd = String.join(";", pointsstring);
+                String assiststoadd = String.join(";", assistsstring);
+                String stealstoadd = String.join(";", stealsstring);
+                String blockstoadd = String.join(";", blocksstring);
+                String reboundstoadd = String.join(";", reboundsstring);
                 values.add(new String[]
-                        {teamlist.getName(), players.getName(), players.jerseytoString(), players.getPosition().toString(), players.getPoints().getMean(players.getGamecount(), players.getPriotgamecount()).toString(),
-                                players.getAssists().getMean(players.getGamecount(),players.getPriotgamecount()).toString(), players.getSteals().getMean(players.getGamecount(),players.getPriotgamecount()).toString()
-                                , players.getBlocks().getMean(players.getGamecount(),players.getPriotgamecount()).toString(), players.getRebounds().getMean(players.getGamecount(),players.getPriotgamecount()).toString(), players.getGamecountString(players.getGamecount()), players.getGamecountString(players.getGamecount())});
+                        {teamlist.getName(), players.getName(), players.jerseytoString(), players.getPosition().toString(), pointstoadd,
+                                assiststoadd, stealstoadd, blockstoadd, reboundstoadd, players.getGamecountString(players.getGamecount())});
             }
         }
         // Write the values to the file
@@ -62,24 +89,34 @@ public class CustomFileReader extends Reader {
 
                     // Add player data to the respective team
                 }for (Team teams : teamlist) {
+                    ArrayList<Double> points = new ArrayList<>();
+                    ArrayList<Double> assists = new ArrayList<>();
+                    ArrayList<Double> steals = new ArrayList<>();
+                    ArrayList<Double> blocks = new ArrayList<>();
+                    ArrayList<Double> rebounds = new ArrayList<>();
                     if (teams.getName().equals(values[0])) {
-                        Double pointvalues = Double.valueOf(values[4]);
-                        Double assistsvalues = Double.valueOf(values[5]);
-                        Double stealsvalues = Double.valueOf(values[6]);
-                        Double blocksvalues = Double.valueOf(values[7]);
-                        Double reboundsvalues = Double.valueOf(values[8]);
+                        String strpoints = values[4];
+                        String strassists = values[5];
+                        String strsteals = values[6];
+                        String strblocks = values[7];
+                        String strrebounds = values[8];
+                        String[] strallpoints = strpoints.split(";");
+                        String[] strallassists = strassists.split(";");
+                        String[] strallsteals = strsteals.split(";");
+                        String[] strallblocks = strblocks.split(";");
+                        String[] strallrebounds = strrebounds.split(";");
+                        for(String point: strallpoints){
+                            points.add(Double.valueOf(point));
+                        }for(String assist: strallassists){
+                            assists.add(Double.valueOf(assist));
+                        }for(String steal: strallsteals){
+                            steals.add(Double.valueOf(steal));
+                        }for(String block: strallblocks){
+                            blocks.add(Double.valueOf(block));
+                        }for(String rebound: strallrebounds){
+                            rebounds.add(Double.valueOf(rebound));
+                        }
                         int gamesplayed = Integer.parseInt(values[9]);
-                        ArrayList<Double> points = new ArrayList<>();
-                        ArrayList<Double> assists = new ArrayList<>();
-                        ArrayList<Double> steals = new ArrayList<>();
-                        ArrayList<Double> blocks = new ArrayList<>();
-                        ArrayList<Double> rebounds = new ArrayList<>();
-
-                        points.add(pointvalues);
-                        assists.add(assistsvalues);
-                        steals.add(stealsvalues);
-                        blocks.add(blocksvalues);
-                        rebounds.add(reboundsvalues);
 
                         // Create Stats objects for player statistics
                         Stats pointsforplayer = new Stats(points, StatsType.POINTS);
@@ -90,7 +127,7 @@ public class CustomFileReader extends Reader {
                         Positions position = Positions.valueOf(values[3]);
 
                         // Create Player object and add it to the team
-                        Player player = new Player(Integer.parseInt(values[2]), values[1], position, pointsforplayer, assistsforplayer, blocksforplayer,  reboundsforplayer, stealsforplayer, gamesplayed, gamesplayed);
+                        Player player = new Player(Integer.parseInt(values[2]), values[1], position, pointsforplayer, assistsforplayer, blocksforplayer,  reboundsforplayer, stealsforplayer, gamesplayed);
                         teams.addPlayer(player);
                     }
                 }

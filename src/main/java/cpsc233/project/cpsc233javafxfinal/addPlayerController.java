@@ -89,13 +89,12 @@ public class addPlayerController implements Initializable {
                     ArrayList<Double> blocksstats = new ArrayList<>();
                     ArrayList<Double> reboundsstats = new ArrayList<>();
                     int gamecount = 0;
-                    int prior = 0;
                     Stats points = new Stats(pointsstats, StatsType.POINTS);
                     Stats assists = new Stats(assistsstats, StatsType.ASSISTS);
                     Stats steals = new Stats(stealssstats, StatsType.STEALS);
                     Stats blocks = new Stats(blocksstats, StatsType.BLOCKS);
                     Stats rebounds = new Stats(reboundsstats, StatsType.REBOUNDS);
-                    Player player = new Player(Integer.parseInt(playerNumber.getText()), playerName.getText(), positions.getValue(), points, assists, blocks, rebounds, steals, gamecount, prior);
+                    Player player = new Player(Integer.parseInt(playerNumber.getText()), playerName.getText(), positions.getValue(), points, assists, blocks, rebounds, steals, gamecount);
                     // Adding player to the team
                     team.addPlayer(player);
                     erroraddPlayertext.setText("Player " + playerName.getText() + " has been added!");

@@ -171,7 +171,7 @@ public class OldMain {
                                     Stats blocks = new Stats(forblocks, StatsType.BLOCKS);
                                     Stats steals = new Stats(forsteals, StatsType.STEALS);
                                     Stats rebounds = new Stats(forrebounds, StatsType.REBOUNDS);
-                                    Player player = new Player(jersey, name, position, points, assists, blocks, rebounds, steals, 0, 0);
+                                    Player player = new Player(jersey, name, position, points, assists, blocks, rebounds, steals, 0);
                                     team.addPlayer(player);
                                 }
                             }
@@ -301,7 +301,7 @@ public class OldMain {
                                     }
                                 }
                                 System.out.println("Evaluation of players last game:");
-                                Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount());
+                                Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount());
                                 System.out.println(" ");
                                 //Clear scanner
                                 scanner.nextLine();
@@ -556,7 +556,7 @@ public class OldMain {
                                                 }else{
                                                     //function from Evaluations.java is used to print last games
                                                     System.out.println("Here is " + returnPlayer.getName() + "'s last game:");
-                                                    Evaluations.fullPrintedEvaluationAndLastGameStats(returnPlayer.getPoints(), returnPlayer.getAssists(), returnPlayer.getSteals(), returnPlayer.getBlocks(), returnPlayer.getRebounds(), returnPlayer.getGamecount(), returnPlayer.getPriotgamecount());
+                                                    Evaluations.fullPrintedEvaluationAndLastGameStats(returnPlayer.getPoints(), returnPlayer.getAssists(), returnPlayer.getSteals(), returnPlayer.getBlocks(), returnPlayer.getRebounds(), returnPlayer.getGamecount());
                                                     System.out.println(" ");
                                                 }
                                             }

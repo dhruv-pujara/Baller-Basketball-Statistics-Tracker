@@ -301,7 +301,7 @@ public class MainInterfaceController implements Initializable {
                                         Player player = players;
                                         // Display the player's last game stats
                                         descriptionText.setText(player.getName() + "'s last game:\n" + "\n" +
-                                                        Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount(), player.getPriotgamecount()));
+                                                        Evaluations.fullPrintedEvaluationAndLastGameStats(player.getPoints(), player.getAssists(), player.getSteals(), player.getBlocks(), player.getRebounds(), player.getGamecount()));
                                         descriptionText.setFont(Font.font("DejaVu Sans", 20));
                                 }
                         }

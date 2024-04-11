@@ -60,27 +60,18 @@ public class Stats {
      * @param gamesplayed The number of games played
      * @return The mean value of the statistic
      */
-    public Double getMean(int gamesplayed, int priorgamecount) {
+    public Double getMean(int gamesplayed) {
         Double summation = 0.0;
-        if(priorgamecount != 0) {
-            Integer divisor = gamesplayed - priorgamecount + 1;
+        int divisor = 0;
+        if(getStats().isEmpty()) {
+            return 0.0;
+        }else{
             for (Double values : getStats()) {
                 summation = summation + values;
+                divisor += 1;
             }
             Double mean = summation / divisor;
             return mean;
-        }else {
-            if (gamesplayed != 0) {
-
-                Integer divisor = gamesplayed;
-                for (Double values : getStats()) {
-                    summation = summation + values;
-                }
-                Double mean = summation / divisor;
-                return mean;
-            } else {
-                return 0.0;
-            }
         }
     }
 
@@ -89,7 +80,7 @@ public class Stats {
      * @param gamesplayed The number of games played
      * @return The standard deviation of the statistic
      */
-    public double getStandardDev(int gamesplayed, int priorgamecount) {
+    public double getStandardDev(int gamesplayed) {
         double summation = 0;
         Integer divisor = 0;
         for (Double values : getStats()) {
@@ -98,7 +89,7 @@ public class Stats {
         if (divisor < 3) {
             return 0;
         } else {
-            Double mean = getMean(gamesplayed, priorgamecount);
+            Double mean = getMean(gamesplayed);
             for (Double values : getStats()) {
                 summation = summation + Math.pow((values - mean), 2);
             }
@@ -106,7 +97,7 @@ public class Stats {
             return standardDev;
         }
     }
-    public Double lastGamestats(int gamesplayed, int gamesloaded){
+    public Double lastGamestats(int gamesplayed){
         return getStats().getLast();
     }
 }
