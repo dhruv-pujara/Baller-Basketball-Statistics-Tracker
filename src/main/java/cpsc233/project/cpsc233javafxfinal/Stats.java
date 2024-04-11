@@ -82,20 +82,24 @@ public class Stats {
      */
     public double getStandardDev(int gamesplayed) {
         double summation = 0;
-        Integer divisor = 0;
+        Integer divisor = -1;
         for (Double values : getStats()) {
             divisor += 1;
         }
-        if (divisor < 3) {
+        if (divisor < 2) {
             return 0;
         } else {
             Double mean = getMean(gamesplayed);
             for (Double values : getStats()) {
-                summation = summation + Math.pow((values - mean), 2);
+                if (values.equals(getStats().getLast())) {
+                    continue;
+                } else {
+                    summation = summation + Math.pow((values - mean), 2);
+                }
             }
             Double standardDev = Math.sqrt(summation / (divisor - 1));
             return standardDev;
-        }
+    }
     }
     public Double lastGamestats(int gamesplayed){
         return getStats().getLast();

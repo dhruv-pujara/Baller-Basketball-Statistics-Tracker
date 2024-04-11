@@ -50,30 +50,34 @@ public class Evaluations{
     private static double evaluationsOfStats(Stats stats, int gamesplayed) {// Evaluates performance of player based on standard deviation
         Integer evaluation = 0;
         Integer lastvalueposition = lastgameIndex(stats);
-        Double lastvalue = stats.getStats().get(lastvalueposition);
+        if(lastvalueposition <= 2){
+            return evaluation;
+        }else {
+            Double lastvalue = stats.getStats().get(lastvalueposition);
 
-        Double SDComparison = stats.getStandardDev(gamesplayed);
-        if (SDComparison == 0) {
-            return evaluation;
-        }
-        Double mean = stats.getMean(gamesplayed);
-        Double SDpositive = mean + SDComparison;
-        Double SDnegative = mean - SDComparison;
-        if (SDnegative < lastvalue && lastvalue < SDpositive) {
-            evaluation = 1;
-            return evaluation;
-        } else if (SDnegative - SDComparison < lastvalue && lastvalue <= SDnegative) {
-            evaluation = -1;
-            return evaluation;
-        } else if (lastvalue <= SDnegative - SDComparison) {
-            evaluation = -2;
-            return evaluation;
-        } else if (SDpositive + SDComparison > lastvalue && lastvalue >= SDpositive) {
-            evaluation = 2;
-            return evaluation;
-        } else {
-            evaluation = 3;
-            return evaluation;
+            Double SDComparison = stats.getStandardDev(gamesplayed - 1);
+            if (SDComparison == 0) {
+                return evaluation;
+            }
+            Double mean = stats.getMean(gamesplayed);
+            Double SDpositive = mean + SDComparison;
+            Double SDnegative = mean - SDComparison;
+            if (SDnegative < lastvalue && lastvalue < SDpositive) {
+                evaluation = 1;
+                return evaluation;
+            } else if (SDnegative - SDComparison < lastvalue && lastvalue <= SDnegative) {
+                evaluation = -1;
+                return evaluation;
+            } else if (lastvalue <= SDnegative - SDComparison) {
+                evaluation = -2;
+                return evaluation;
+            } else if (SDpositive + SDComparison > lastvalue && lastvalue >= SDpositive) {
+                evaluation = 2;
+                return evaluation;
+            } else {
+                evaluation = 3;
+                return evaluation;
+            }
         }
     }
 
